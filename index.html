@@ -70,14 +70,16 @@
 					<span id="unameError" class= "error-message"></span>
 
 					
-					<input type="password" placeholder="Enter Password" name="psw" required>
+					<input id="password" type="password" placeholder="Enter Password" name="psw" required>
+					<span id="passwordError" class= "error-message"></span>
 
-					<label for="fullname"><b>Full Name</b></label>
-					<input type="text" placeholder="Enter full name" name="fullname" required>
+					
+					<input id="fullName" type="text" placeholder="Enter full name" name="fullname" required>
+					<span id="fullNameError" class= "error-message"></span>
 
-
-					<label for="email"><b>Email</b></label>
-					<input type="text" placeholder="Enter Email" name="email" required>
+					
+					<input id="email" type="text" placeholder="Enter Email" name="email" required>
+					<span id="emailError" class= "error-message"></span>
 			  
 					<div class="clearfix">
 					  <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
