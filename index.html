@@ -39,13 +39,12 @@
 				  </div>
 			  
 				  <div class="container">
-					<label for="uname"><b>Username</b></label>
-					<input type="text" placeholder="Enter Username" name="uname" required>
+					<input id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
 			  
-					<label for="psw"><b>Password</b></label>
-					<input type="password" placeholder="Enter Password" name="psw" required>
+
+					<input id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
 					  
-					<button type="submit">Login</button>
+					<button type="submit" onclick="checkLoginDetails()">Login</button>
 					<label>
 					  <input type="checkbox" checked="checked" name="remember"> Remember me
 					</label>
@@ -83,7 +82,7 @@
 			  
 					<div class="clearfix">
 					  <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
-					  <button type="submit" class="signupbtn">Sign Up</button>
+					  <button type="submit" onclick="saveDetails()" class="signupbtn">Sign Up</button>
 					</div>
 				  </div>
 				</form>

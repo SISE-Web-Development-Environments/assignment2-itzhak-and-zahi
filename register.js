@@ -36,7 +36,10 @@ function check_username(){
     var form = document.getElementById("registerForm");
     for (var index = 0; index < userArray.length; index++) {
         var user = userArray[index];
-        if(user.username.localeCompare($("#registerForm").username)  ){
+        let test = form.elements[0].value;
+        let test1 = $("uname".valueOf());
+        let userTest = user.username;
+        if(user.username.localeCompare(test) ==0 ){
             $("#unameError").html("that username is already exist ! ");
             $("#unameError").show();
             userNameError = true;
@@ -45,6 +48,7 @@ function check_username(){
     }
     if(!userNameError){
         $("#unameError").hide();
+        userNameError = false;
     }
 }
 
@@ -61,7 +65,8 @@ function check_password(){
             passwordError = true;
         }
     }else {
-        $("#password").hide();
+        $("#passwordError").hide();
+        passwordError = false;
     }
 }
 
@@ -73,6 +78,7 @@ function check_fullName(){
         fullNameError = true;
     }else{
         $("#fullNameError").hide();
+        fullNameError = false;
     }
 }
 
@@ -82,8 +88,43 @@ function check_email(){
     if(!$("#email").val().match(/^[a-z0-9A-Z]+@[a-z0-9A-Z]+.[a-zA-Z]/)){
         $("#emailError").html("not legal email !");
         $("#emailError").show();
+        emailError = true;
     }else{
         $("#emailError").hide();
+        emailError = false;
+    }
+
+}
+
+
+function saveDetails() {
+
+    check_username();
+    check_fullName();
+    check_password();
+    check_email();
+    var form = document.getElementById("registerForm");
+    if ( !userNameError && !passwordError && !fullNameError && !emailError){
+        var userName = form.elements[0].value;
+        var pass = form.elements[1].value;
+        var fullName = form.elements[2].value;
+        var email = form.elements[3].value;
+        arrDetails = {fullName,pass,email};
+        localStorage.setItem(userName,arrDetails);
+        //changeDisplay(document.getElementById("startGameDiv"),document.getElementById("register"));
+    }
+}
+
+function checkLoginDetails() {
+
+    var uname = $("#uNameLogin").val;
+    var pass = $("#passLogin").val;
+
+    details=localStorage.getItem(uname);
+    if(details[1].localeCompare(pass)){
+        //changeDisplay(document.getElementById("startGameDiv"),document.getElementById("login"));
+    }else{
+        window.alert("Wrong username or password! ");
     }
 
 }
