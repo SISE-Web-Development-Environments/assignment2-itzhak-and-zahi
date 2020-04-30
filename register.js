@@ -5,6 +5,7 @@ var userArray = [{username: "p",
     fullName: "Admin",
     email: "p@p.p",
     highestScore: 0}];
+localStorage.setItem("p",userArray);
 var fullNameError = false;
 var userNameError = false;
 var passwordError = false;
@@ -109,22 +110,30 @@ function saveDetails() {
         var pass = form.elements[1].value;
         var fullName = form.elements[2].value;
         var email = form.elements[3].value;
-        arrDetails = {fullName,pass,email};
+        arrDetails = {username,fullName,pass,email};
         localStorage.setItem(userName,arrDetails);
+        currentUser = uname;
         //changeDisplay(document.getElementById("startGameDiv"),document.getElementById("register"));
     }
+    document.getElementById('register').style.display='none'
 }
 
 function checkLoginDetails() {
+    var loginForm = document.getElementById("loginForm");
+    var uname = loginForm.elements[0].value;
+    var pass = loginForm.elements[1].value;
 
-    var uname = $("#uNameLogin").val;
-    var pass = $("#passLogin").val;
-
-    details=localStorage.getItem(uname);
-    if(details[1].localeCompare(pass)){
-        //changeDisplay(document.getElementById("startGameDiv"),document.getElementById("login"));
+    var details=localStorage.getItem(uname);
+    if (details != null){
+        if( details[1].localeCompare(pass)){
+            //changeDisplay(document.getElementById("startGameDiv"),document.getElementById("login"));
+            window.alert("pass is fire ");
+            currentUser = uname;
+        }else{
+            window.alert("Wrong username or password! ");
+        }
     }else{
-        window.alert("Wrong username or password! ");
+    window.alert("Wrong username or password! ");
     }
 
 }
