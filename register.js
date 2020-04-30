@@ -134,6 +134,8 @@ function checkLoginDetails() {
         }
     }else{
     window.alert("Wrong username or password! ");
+
+
     }
 
 }
