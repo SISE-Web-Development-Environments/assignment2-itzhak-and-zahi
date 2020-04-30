@@ -3,63 +3,50 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-		<script type="text/javascript" src="./menu.js"></script>
+<!--		<script type="text/javascript" src="./menu.js"></script>-->
 		<script type="text/javascript" src="./register.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 
-		<!-- <div id="navbar" href="javascript:void(0)">
-			<ul>
-			  <li><a class="active">Menu</a></li>
-			  <li><a href="#about">About Me</a></li>
-			  <li><a href="#photos">My Photos</a></li>
-			  <li><a href="#playlist">My Playlist</a></li>
-			  <li><a href="#like">Like</a></li>
-			  <li><a href="#qrcoder">QR code</a></li>
-			  <li><a href="#spa">Q&A</a></li>
-			  <li><a href="#contact">Contact Me</a></li>
-			  <li style="float:right" ><img src="logo.png" width="300" height="40" ></li>
-			</ul>
-		  </div> -->
 	</head>
 
 	<body>
+					 <div id="navbar" href="javascript:void(0)" style="display: none">
+						<ul>
+						  <li><a id="currentUser" class="active">Hello, guest</a></li>
+						  <li><a>About</a></li>
+						  <li><a>Log Out</a></li>
+						</ul>
+					  </div>
 		<div id="wrapper">
-			<div align=center id="welcome" class="page">
-			<p> welcome to pacman </p>
-			<button  type="button" id="loginButton" onclick="changeDisplayToLoginOrRegister(login)">Login</button>
-			<button  type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
+			<div align=center id="welcome" class="allDivs" style="display: block">
+				<p> welcome to pacman </p>
+				<button  type="button" id="loginButton" onclick="changeDisplayToLoginOrRegister(login)">Login</button>
+				<button  type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
 			</div>
 
-			<div id="login" class="modal" style="display: none;">
-  
-				<form id="loginForm" class="modal-content animate"  method="post">
-				  <div class="imgcontainer">
-					<span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
-<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
-				  </div>
-			  
-				  <div class="container">
-					<input id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
-			  
+			<div id="login" class="allDivs" style="display: none">
+				<form id="loginForm" class="modal-content animate">
+					<div class="imgcontainer">
+						<span onclick="cancelbtn(login)" class="close" title="Close Modal">&times;</span>
+						<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
+					</div>
 
-					<input id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
-					  
-					<button type="submit" onclick="checkLoginDetails()">Login</button>
-					<label>
-					  <input type="checkbox" checked="checked" name="remember"> Remember me
-					</label>
-				  </div>
-			  
-				  <div class="container" style="background-color:#f1f1f1">
-					<button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
-					<span class="psw">Forgot <a href="#">password?</a></span>
-				  </div>
+					<div class="container">
+						<input id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
+						<input id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
+						<button type="submit" onclick="checkLoginDetails()">Login</button>
+
+					</div>
+					<div class="container" style="background-color:#f1f1f1">
+						<button type="button" onclick="cancelbtn(login)" class="cancelbtn">Cancel</button>
+						<span class="psw">Forgot <a href="#">password?</a></span>
+				  	</div>
 				</form>
 			  </div>
 
-			  <div id="register" class="modal" style="display: none;">
-				<span onclick="document.getElementById('register').style.display='none'" class="close" title="Close Modal">&times;</span>
-				<form id="registerForm" class="modal-content" >
+			  <div id="register" class="allDivs" style="display: none">
+				<span onclick="cancelbtn(register)" class="close" title="Close Modal">&times;</span>
+				<form id="registerForm" class="modal-content animate" >
 				  <div class="container">
 					<h1>Sign Up</h1>
 					<p>Please fill in this form to create an account.</p>
@@ -79,16 +66,14 @@
 					
 					<input id="email" type="text" placeholder="Enter Email" name="email" required>
 					<span id="emailError" class= "error-message"></span>
-			  
 					<div class="clearfix">
-					  <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
+					  <button type="button" onclick="cancelbtn(register)" class="cancelbtn">Cancel</button>
 					  <button type="submit" onclick="saveDetails()" class="signupbtn">Sign Up</button>
 					</div>
 				  </div>
 				</form>
 			  </div>
-
-			<div id="game" style="display: none;">
+			<div id="mainContent" class="allDivs" style="display: none">
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" />
@@ -97,7 +82,7 @@
 					<label for="lblTime">TIME:</label>
 					<input id="lblTime" type="text" />
 				</div>
-				<div id="game">
+				<div id="pacmanGame">
 					<canvas id="canvas" height="600" width="600"></canvas>
 				</div>
 			</div>
