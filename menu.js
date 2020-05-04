@@ -1,7 +1,7 @@
 
 window.onscroll = function() {myFunction()};
 var navbar = document.getElementById("navbar");
-//var sticky = navbar.offsetTop;
+var sticky = navbar.offsetTop;
 
 function myFunction() {
   if (window.pageYOffset >= sticky) {
@@ -10,13 +10,6 @@ function myFunction() {
     navbar.classList.remove("sticky");
   }
 }
-
-function changeDisplay(inDiv, outDiv) {
-    outDiv.style.display = "none";
-    inDiv.style.display = "block";
-    // document.getElementById(outDiv).style.display = "none";
-    // document.getElementById(inDiv).style.display = "true";
-  }
 
 
   function changeDisplayToLoginOrRegister(inDiv) {

@@ -15,8 +15,6 @@ var emailError = false;
 
 
 $(function(){
-
-    //window.alert("$$$$$$$")
    // changeDisplay("welcome")
    //  document.getElementById("welcome").style.display = "block";
    //  document.getElementById("login").style.display = "none";
@@ -119,10 +117,11 @@ function saveDetails() {
         var score = 0;
         //arrDetails = {username,fullName,pass,email};
         localStorage.setItem(userName,[userName, pass, fullName, email, score]);
-        changeDisplay(document.getElementById("mainContent"),document.getElementById("welcome"));
-        //document.getElementById("currentUser").innerHTML = "Hello, " + uname;
+        changeDisplay(document.getElementById("settingPage"),document.getElementById("welcome"));
+        document.getElementById("currentUser").innerHTML = "Hello, " + userName;
         //document.getElementById("register").style.display="none";
         document.getElementById("registerForm").reset();
+        document.getElementById("navbar").style.display="inline"
     }
    // document.getElementById('register').style.display='none'
 }
@@ -135,11 +134,11 @@ function checkLoginDetails() {
     var details=localStorage.getItem(uname);
     if (details != null){
         if( details[1].localeCompare(pass)){
-            //document.getElementById("currentUser").innerHTML = "Hello, " + uname;
-            changeDisplay(document.getElementById("mainContent"),document.getElementById("welcome"));
+            document.getElementById("currentUser").innerHTML = "Hello, " + uname;
+            changeDisplay(document.getElementById("settingPage"),document.getElementById("welcome"));
             document.getElementById("loginForm").reset();
             document.getElementById("registerForm").reset();
-            document.getElementById("navbar").show();
+            document.getElementById("navbar").style.display="inline"
         }else{
             window.alert("Wrong username or password! ");
         }

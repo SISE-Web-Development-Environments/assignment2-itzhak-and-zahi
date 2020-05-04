@@ -3,20 +3,21 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-<!--		<script type="text/javascript" src="./menu.js"></script>-->
+		<script type="text/javascript" src="./menu.js"></script>
 		<script type="text/javascript" src="./register.js"></script>
+		<script type="text/javascript" src="./settings.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 
 	</head>
 
 	<body>
-					 <div id="navbar" href="javascript:void(0)" style="display: none">
+		<div id="navbar" href="javascript:void(0)" style="display: none">
 						<ul>
 						  <li><a id="currentUser" class="active">Hello, guest</a></li>
 						  <li><a>About</a></li>
 						  <li><a>Log Out</a></li>
 						</ul>
-					  </div>
+		</div>
 		<div id="wrapper">
 			<div align=center id="welcome" class="allDivs" style="display: block">
 				<p> welcome to pacman </p>
@@ -73,7 +74,71 @@
 				  </div>
 				</form>
 			  </div>
-			<div id="mainContent" class="allDivs" style="display: none">
+
+
+			<div id="settingPage" class="allDivs" style="display: none" align="center">
+				<form id="gameSettings">
+					<span class="setting">
+						Choose a Key For Moving Up:
+						<input id="upKey" type="text" maxlength="1" onkeypress="updateKey(event,'up')">
+						<br>
+					</span>
+					<span class="setting">
+						Choose a Key For Moving Down:
+						<input id="downKey" type="text" maxlength="1" onkeypress="updateKey(event,'down')">
+						<br>
+					</span>
+					<span class="setting">
+						Choose a Key For Moving Left:
+						<input id="leftKey" type="text" maxlength="1" onkeypress="updateKey(event,'left')">
+						<br>
+					</span>
+					<span class="setting">
+						Choose a Key For Moving Right:
+						<input id="rightKey" type="text" maxlength="1" onkeypress="updateKey(event,'right')">
+						<br>
+					</span>
+
+					<span class="setting">
+						Choose 5 Points Color:
+						<input id="5PointsColor" type="color" required>
+						<br>
+					</span>
+					<span class="setting">
+						Choose 15 Points Color:
+						<input id="15PointsColor" type="color" required>
+						<br>
+					</span>
+					<span class="setting">
+						Choose 25 Points Color:
+						<input id="25PointsColor" type="color" required>
+						<br>
+					</span>
+					<span class="setting">
+						Choose Number Of Balls [50-90]:
+						<input id="numOfBalls" type="range" value="50" min="50" max="90" required onchange="updateTextInputBalls(this.value)">
+						<input type="text" id="ballsInput" value="50">
+						<br>
+					</span>
+					<span class="setting">
+						Choose Game Time [Min 60s]:
+						<input id="gameTime" type="range" value="60" min="60" max="10000" required onchange="updateTextInputTime(this.value)">
+						<input type="text" id="timeInput" value="">
+						<br>
+					</span>
+					<span class="setting">
+						Choose Number Of Monsters:
+						<input id="numOfMonsters" type="range" value="1" min="1" max="4" required onchange="updateTextInputMonsters(this.value)">
+						<input type="text" id="monstersInput" value="">
+						<br>
+					</span>
+					<button type="button" onclick="fillFormRandomly()">Random Settings</button>
+					<button type="reset">Reset To Default Settings</button>
+				</form>
+				<button type="submit" onclick="startGame()">Start Game</button>
+			</div>
+			<div id="mainContent" class="allDivs" style="display: none" align="center">
+				<header>
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" />
@@ -82,13 +147,24 @@
 					<label for="lblTime">TIME:</label>
 					<input id="lblTime" type="text" />
 				</div>
+				</header>
+				<div id="left">
+				</div>
 				<div id="pacmanGame">
 					<canvas id="canvas" height="600" width="600"></canvas>
+				</div>
+				<div id="settingDisplay">
+					<ul>
+<!--							<li> <label>Game Time: </label><input id="inGameTimeInput" type="text" value=""></li>-->
+						<li> <label>Monsters: </label><input id="inGameMonstersInput" type="text" value=""></li>
+						<li> <label>Balls: </label><input id="inGameBallsInput" type="text" value=""></li>
+					</ul>
+				</div>
+
+
 				</div>
 			</div>
 		</div>
 
-		  
-		  
 	</body>
 </html>
