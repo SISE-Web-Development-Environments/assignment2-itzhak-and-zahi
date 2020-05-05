@@ -10,18 +10,53 @@
 		<nav id="navbar" href="javascript:void(0)" style="display: none">
 			<ul>
 				<li id="user"><a id="currentUser">Hello, guest</a></li>
-				<li id="about"><a>About</a></li>
+				<li id="about"><a onclick="openDialog(),closeModal();">About</a></li>
 				<li id="logOut" style="float: right"><a>Log Out</a></li>
 			</ul>
 		</nav>
 	</head>
 
 	<body>
+		<div id="aboutModal" class="modal" style="display: none">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="imgcontainer">
+					<span onclick="cancelbtn(login)" class="close" title="Close Modal">&times;</span>
+					<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
+				</div>
+				<p>The developers of this pac-man game are:
+					<br>
+					Zahi Kapri - ID: 307881276
+					<br>
+					Itzhak Finkelstein - ID: 203640271
+					<br>
+					asdsadsasadsa
+					<br>
+					We had difficulties designing the pacman shape. In addition, we had to decide the way of movement for the monsters, which wasn't that simple.
+					<br>
+					Another problem we had to deal with is the snacks on the board, and how we can control who can eat them.
+					<br>
+					We used several JQuery functions: ready- for initialize the canvas, the pacman, the monsters and the treat objects while DOM is ready.
+					<br>
+					remove- to take the life elements out of the DOM.
+					<br>
+					append- to add life element into the DOM.
+					<br>
+					hide and show- to show errors for invalid values, or hide them if the user insert valid values.
+					<br>
+					and more...</p>
+			</div>
+
+		</div>
 		<div id="wrapper" align="center">
 			<div align=center id="welcome" class="allDivs" style="display: block">
-				<p> welcome to pacman </p>
-				<button  type="button" id="loginButton" onclick="changeDisplayToLoginOrRegister(login)">Login</button>
-				<button  type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
+				<p style="color: #f1f1f1"> welcome to pacman </p>
+				<br>
+				<img src="resources/pacpac.png" align="center">
+				<br>
+				<button  class="welcome" type="button" id="loginButton" onclick="changeDisplayToLoginOrRegister(login)">Login</button>
+				<button  class="welcome" type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
 			</div>
 
 			<div id="login" class="allDivs" style="display: none">
@@ -76,6 +111,7 @@
 
 
 			<div id="settingPage" class="allDivs" style="display: none" align="center">
+				<br>
 				<img src="resources/pacmanLogo.png">
 
 				<form id="gameSettings" align="center">
@@ -144,9 +180,9 @@
 													<div class="divTableCell">25 Points Color</div>
 												</div>
 												<div class="divTableRow">
-													<div class="divTableCell"><input id="5PointsColor" type="color" required></div>
-													<div class="divTableCell"><input id="15PointsColor" type="color" required></div>
-													<div class="divTableCell"><input id="25PointsColor" type="color" required></div>
+													<div class="divTableCell"><input id="5PointsColor" type="color" value="#ff0000" required></div>
+													<div class="divTableCell"><input id="15PointsColor" type="color" value="#0000ff"  required></div>
+													<div class="divTableCell"><input id="25PointsColor" type="color" value="#00ff00"  required></div>
 												</div>
 											</div>
 										</div>
@@ -248,7 +284,7 @@
 
 					<br>
 				</form>
-				<button type="submit" onclick="startGame()">Start Game</button>
+				<button class="start" type="submit" onclick="startGame()">Start Game</button>
 			</div>
 			<div id="mainContent" class="allDivs" style="display: none" align="center">
 				<div class="divTable">

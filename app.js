@@ -7,17 +7,20 @@ var start_time;
 var time_elapsed;
 var interval;
 
-$(document).ready(function() {
-	context = canvas.getContext("2d");
-	Start();
-});
 
 function Start() {
+	context = canvas.getContext("2d");
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 50;
+	var food_remain = $('#numOfBalls').val();
+	var five_remain = Math.floor(food_remain * 60/100);
+	var fifteen_remain = Math.floor(food_remain * 30/100);
+	var twenty_five_remain = Math.floor(food_remain * 10/100);
+	if (five_remain + fifteen_remain + twenty_five_remain != food_remain){
+		twenty_five_remain++;
+	}
 	var pacman_remain = 1;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
@@ -35,8 +38,21 @@ function Start() {
 			} else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
-					food_remain--;
-					board[i][j] = 1;
+					if (randomNum <= (1.0 * five_remain) / cnt) {
+						five_remain--;
+						food_remain--;
+						board[i][j] = 1;
+
+					}else if (1.0 * fifteen_remain + five_remain / cnt) {
+						/** 5 point - 1    15 point - 3      25 point - 5  */
+						fifteen_remain--;
+						food_remain--;
+						board[i][j] = 3;
+					} else if (1.0 * twenty_five_remain + five_remain + fifteen_remain / cnt) {
+						twenty_five_remain--;
+						food_remain--;
+						board[i][j] = 5;
+					}
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
 					shape.j = j;
@@ -51,7 +67,14 @@ function Start() {
 	}
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 1;
+		if ( twenty_five_remain > 0){
+			board[emptyCell[0]][emptyCell[1]] = 5;
+		}else if ( fifteen_remain > 0){
+			board[emptyCell[0]][emptyCell[1]] = 3;
+		}else if ( five_remain > 0){
+			board[emptyCell[0]][emptyCell[1]] = 1;
+
+		}
 		food_remain--;
 	}
 	keysDown = {};
@@ -118,9 +141,19 @@ function Draw() {
 				context.fill();
 			} else if (board[i][j] == 1) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+				context.fillStyle = $('#5PointsColor').val(); //color
 				context.fill();
+			}else if (board[i][j] == 3) {
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = $('#15PointsColor').val(); //color
+				context.fill();
+			}else if (board[i][j] == 5) {
+					context.beginPath();
+					context.arc(center.x, center.y, 20, 0, 2 * Math.PI); // circle
+					context.fillStyle = $('#25PointsColor').val(); //color
+					context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);

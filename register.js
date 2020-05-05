@@ -192,4 +192,5 @@ function changeDisplayToLoginOrRegister(inDiv) {
 
 function cancelbtn(divElement) {
     divElement.style.display = "none";
+    $('#aboutModal').css("display", "none");
 }

@@ -3,6 +3,7 @@ var downKey;
 var leftKey;
 var rightKey;
 var mute=false;
+var dialogIsOn = false;
 
 function updateTextInputMonsters(val) {
     //document.getElementById('monstersInput').value=val;
@@ -104,4 +105,31 @@ function muteMusic(){
 function startGame() {
    // document.getElementById('gameSettings').reset();
     changeDisplay(document.getElementById("mainContent"));
+    Start();
 }
+
+function openDialog() {
+    $('#aboutModal').css("display", "block");
+    dialogIsOn = true;
+}
+
+
+function closeModal() {
+    window.onclick = function (event) {
+        window.onclick = function (event) {
+            if (dialogIsOn == true) {
+                $('#aboutModal').css("display", "none");
+                dialogIsOn = false;
+            }
+        }
+    }
+}
+
+
+
+$(document).keyup(function(e) {
+    if (e.key === "Escape") { // escape key maps to keycode `27`
+        $('#aboutModal').css("display", "none");
+        dialogIsOn = false;
+    }
+});

@@ -22,7 +22,9 @@ p{
 
 body {
   background: black;
-  font-family: Arial, Helvetica, sans-serif;}
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
 
 #mainContent {height: 100%; width:100%;}
 #left, #pacmanGame, #settingDisplay {display: inline-block; *display: inline; zoom: 1; vertical-align: top; font-size: 12px;}
@@ -41,6 +43,16 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
+button.welcome {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+}
+
 button {
   background-color: #4CAF50;
   color: white;
@@ -49,6 +61,19 @@ button {
   border: none;
   cursor: pointer;
   width: 100%;
+}
+
+button.start {
+  background-color: coral;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 25px 25px 25px 25px;
+  height: 60px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  font-size: large;
 }
 
 button:hover {
@@ -103,7 +128,7 @@ span.psw {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 30%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -175,8 +200,8 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 #settingPage{
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   position: absolute;
 }
 
@@ -305,10 +330,13 @@ input[type=text]:focus, input[type=password]:focus {
 
 
 ul {
+  padding: 0;
+  margin: 0px;
   position: -webkit-sticky;
   position: sticky;
   list-style-type: none;
   width: 100%;
+  height: 50px;
   top: 0;
   overflow: hidden;
   background-color: lightslategrey;
@@ -317,9 +345,13 @@ ul {
 
 li {
   float: left;
+  margin: 0px;
+  padding: 0;
 }
 
 li a {
+  padding: 0;
+  margin: 0px;
   display: block;
   color: white;
   text-align: center;
@@ -330,42 +362,6 @@ li a {
 }
 
 
-/*nav{
-  background-color: rgb(6, 154, 190);
-  padding: 0.5% 15%;
-  opacity: 0.95;
-  display: flex;
-
-  top: 0;
-}
-
-
-ul{
-  width:100%;
-  height: 100%;
-  list-style-type: none;
-  background-color: lightslategrey;
-  position: -webkit-sticky;
-  position: sticky;
-
-}
-li{
-  display: inline-block;
-  margin: 20px;
-}
-li a{
-  text-decoration: none;
-  text-emphasis: none;
-  color: white;
-  text-decoration-color: white;
-  font-family: "Lucida Sans",sans-serif;
-
-}
-li:hover{
-  background-color: black;
-}
-
- */
 .h1{
   color: white;
   text-decoration-color: white;
@@ -425,7 +421,7 @@ li:hover{
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  height: 45px;
   text-decoration: none;
   text-decoration-color: white;
   font-family: "Lucida Sans",sans-serif;
@@ -436,7 +432,7 @@ li:hover{
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  height: 45px;
   text-decoration: none;
   text-decoration-color: white;
   font-family: "Lucida Sans",sans-serif;
@@ -448,7 +444,7 @@ li:hover{
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  height: 45px;
   text-decoration: none;
   text-decoration-color: white;
   font-family: "Lucida Sans",sans-serif;
@@ -459,7 +455,7 @@ li:hover{
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  height: 45px;
   text-decoration: none;
   text-decoration-color: white;
   font-family: "Lucida Sans",sans-serif;
@@ -470,7 +466,7 @@ li:hover{
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  height: 45px;
   text-decoration: none;
   text-decoration-color: white;
   font-family: "Lucida Sans",sans-serif;
@@ -481,7 +477,7 @@ li:hover{
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  height: 45px;
   text-decoration: none;
   text-decoration-color: white;
   font-family: "Lucida Sans",sans-serif;
