@@ -15,7 +15,11 @@ var emailError = false;
 
 
 $(function(){
-
+   // changeDisplay("welcome")
+   //  document.getElementById("welcome").style.display = "block";
+   //  document.getElementById("login").style.display = "none";
+   //  document.getElementById("register").style.display = "none";
+   //  document.getElementById("mainContent").style.display = "none";
     $("#uname").focusout(function () {
         check_username();
     });  
@@ -44,12 +48,12 @@ function check_username(){
             $("#unameError").html("that username is already exist ! ");
             $("#unameError").show();
             userNameError = true;
-        
+        }else{
+            userNameError = false;
         }
     }
     if(!userNameError){
         $("#unameError").hide();
-        userNameError = false;
     }
 }
 
@@ -110,12 +114,16 @@ function saveDetails() {
         var pass = form.elements[1].value;
         var fullName = form.elements[2].value;
         var email = form.elements[3].value;
-        arrDetails = {username,fullName,pass,email};
-        localStorage.setItem(userName,arrDetails);
-        currentUser = uname;
-        //changeDisplay(document.getElementById("startGameDiv"),document.getElementById("register"));
+        var score = 0;
+        //arrDetails = {username,fullName,pass,email};
+        localStorage.setItem(userName,[userName, pass, fullName, email, score]);
+        changeDisplay(document.getElementById("settingPage"),document.getElementById("welcome"));
+        document.getElementById("currentUser").innerHTML = "Hello, " + userName;
+        //document.getElementById("register").style.display="none";
+        document.getElementById("registerForm").reset();
+        document.getElementById("navbar").style.display="inline"
     }
-    document.getElementById('register').style.display='none'
+   // document.getElementById('register').style.display='none'
 }
 
 function checkLoginDetails() {
@@ -126,9 +134,11 @@ function checkLoginDetails() {
     var details=localStorage.getItem(uname);
     if (details != null){
         if( details[1].localeCompare(pass)){
-            //changeDisplay(document.getElementById("startGameDiv"),document.getElementById("login"));
-            window.alert("pass is fire ");
-            currentUser = uname;
+            document.getElementById("currentUser").innerHTML = "Hello, " + uname;
+            changeDisplay(document.getElementById("settingPage"),document.getElementById("welcome"));
+            document.getElementById("loginForm").reset();
+            document.getElementById("registerForm").reset();
+            document.getElementById("navbar").style.display="inline"
         }else{
             window.alert("Wrong username or password! ");
         }
@@ -138,4 +148,48 @@ function checkLoginDetails() {
 
     }
 
+}
+
+$("#loginForm").submit(function() {
+
+    window.alert("login good")
+    checkLoginDetails()
+    // if (checkLoginDetails()) {
+    //     document.getElementById("loginForm").reset();
+    //     document.getElementById("registerForm").reset();
+    //     document.getElementById('login-link').style.display = 'none';
+    //     document.getElementById('register-link').style.display = 'none';
+    //     document.getElementById('logout-link').style.display = 'inline-block';
+    //
+    //     changeDisplay("mainContent");
+    //     $("#login-error").hide();
+    //     $("nav").show();
+    //     return false;
+    // } else {
+    //     $("#login-error").html("Invalid username or password");
+    //     $("#login-error").show();
+    //     return false;
+    // }
+});
+
+
+function changeDisplay(inDiv) {
+    var allDivs = document.getElementsByClassName("allDivs");
+    for (let i = 0; i < allDivs.length; i++) {
+        allDivs[i].style.display="none";
+    }
+
+    //outDiv.style.display = "none";
+    inDiv.style.display = "block";
+    // document.getElementById(outDiv).style.display = "none";
+    // document.getElementById(inDiv).style.display = "true";
+}
+
+
+function changeDisplayToLoginOrRegister(inDiv) {
+    inDiv.style.display = "block";
+}
+
+function cancelbtn(divElement) {
+    divElement.style.display = "none";
 }

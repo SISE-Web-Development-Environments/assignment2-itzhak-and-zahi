@@ -5,61 +5,48 @@
 		<script type="text/javascript" src="./app.js"></script>
 		<script type="text/javascript" src="./menu.js"></script>
 		<script type="text/javascript" src="./register.js"></script>
+		<script type="text/javascript" src="./settings.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
-
-		<!-- <div id="navbar" href="javascript:void(0)">
+		<nav id="navbar" href="javascript:void(0)" style="display: none">
 			<ul>
-			  <li><a class="active">Menu</a></li>
-			  <li><a href="#about">About Me</a></li>
-			  <li><a href="#photos">My Photos</a></li>
-			  <li><a href="#playlist">My Playlist</a></li>
-			  <li><a href="#like">Like</a></li>
-			  <li><a href="#qrcoder">QR code</a></li>
-			  <li><a href="#spa">Q&A</a></li>
-			  <li><a href="#contact">Contact Me</a></li>
-			  <li style="float:right" ><img src="logo.png" width="300" height="40" ></li>
+				<li id="user"><a id="currentUser">Hello, guest</a></li>
+				<li id="about"><a>About</a></li>
+				<li id="logOut" style="float: right"><a>Log Out</a></li>
 			</ul>
-		  </div> -->
+		</nav>
 	</head>
 
 	<body>
-		<div id="wrapper">
-			<div align=center id="welcome" class="page">
-			<p> welcome to pacman </p>
-			<button  type="button" id="loginButton" onclick="changeDisplayToLoginOrRegister(login)">Login</button>
-			<button  type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
+		<div id="wrapper" align="center">
+			<div align=center id="welcome" class="allDivs" style="display: block">
+				<p> welcome to pacman </p>
+				<button  type="button" id="loginButton" onclick="changeDisplayToLoginOrRegister(login)">Login</button>
+				<button  type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
 			</div>
 
-			<div id="login" class="modal" style="display: none;">
-  
-				<form id="loginForm" class="modal-content animate"  method="post">
-				  <div class="imgcontainer">
-					<span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
-<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
-				  </div>
-			  
-				  <div class="container">
-					<input id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
-			  
+			<div id="login" class="allDivs" style="display: none">
+				<form id="loginForm" class="modal-content animate">
+					<div class="imgcontainer">
+						<span onclick="cancelbtn(login)" class="close" title="Close Modal">&times;</span>
+						<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
+					</div>
 
-					<input id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
-					  
-					<button type="submit" onclick="checkLoginDetails()">Login</button>
-					<label>
-					  <input type="checkbox" checked="checked" name="remember"> Remember me
-					</label>
-				  </div>
-			  
-				  <div class="container" style="background-color:#f1f1f1">
-					<button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
-					<span class="psw">Forgot <a href="#">password?</a></span>
-				  </div>
+					<div class="container">
+						<input id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
+						<input id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
+						<button type="submit" onclick="checkLoginDetails()">Login</button>
+
+					</div>
+					<div class="container" style="background-color:#f1f1f1">
+						<button type="button" onclick="cancelbtn(login)" class="cancelbtn">Cancel</button>
+						<span class="psw">Forgot <a href="#">password?</a></span>
+				  	</div>
 				</form>
 			  </div>
 
-			  <div id="register" class="modal" style="display: none;">
-				<span onclick="document.getElementById('register').style.display='none'" class="close" title="Close Modal">&times;</span>
-				<form id="registerForm" class="modal-content" >
+			  <div id="register" class="allDivs" style="display: none">
+				<span onclick="cancelbtn(register)" class="close" title="Close Modal">&times;</span>
+				<form id="registerForm" class="modal-content animate" >
 				  <div class="container">
 					<h1>Sign Up</h1>
 					<p>Please fill in this form to create an account.</p>
@@ -79,31 +66,217 @@
 					
 					<input id="email" type="text" placeholder="Enter Email" name="email" required>
 					<span id="emailError" class= "error-message"></span>
-			  
 					<div class="clearfix">
-					  <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
+					  <button type="button" onclick="cancelbtn(register)" class="cancelbtn">Cancel</button>
 					  <button type="submit" onclick="saveDetails()" class="signupbtn">Sign Up</button>
 					</div>
 				  </div>
 				</form>
 			  </div>
 
-			<div id="game" style="display: none;">
-				<div id="score">
-					<label for="lblScore">SCORE:</label>
-					<input id="lblScore" type="text" />
+
+			<div id="settingPage" class="allDivs" style="display: none" align="center">
+				<img src="resources/pacmanLogo.png">
+
+				<form id="gameSettings" align="center">
+					<img src="resources/settings.png">
+					<div  class="divTable">
+						<div class="divTableBody">
+							<div class="divTableRow">
+								<div class="divTableCell" align="center">
+
+								</div>
+								<div class="divTableCell" align="top">
+									<h1> Game Settings </h1>
+									<br>
+									<!--time setting-->
+									<div align="center">
+										<div id="timeValueBox" class="valueBox" align="center">
+											<img id="clockLogo" src="resources/clock2.png">
+											<div id="timeValue">60</div>
+										</div>
+										<div id="timeSetting" class="setting" align="center">
+											Choose Game Time
+											<input id="gameTime" class="slider" type="range" value="60" min="60" max="10000" required onchange="updateTextInputTime(this.value)">
+										</div>
+									</div>
+									<br>
+									<!--Monsters setting-->
+									<div align="center">
+										<div id="monstersValueBox" class="valueBox" align="center">
+											<img id="monsterLogo "src="resources/monstersLogo.png">
+											<div id="monstersValue">1</div>
+										</div>
+										<div id="monstersSetting" class="setting" align="center">
+											Choose Number Of Monsters
+											<input id="numOfMonsters" class="slider" type="range" value="1" min="1" max="4" required onchange="updateTextInputMonsters(this.value)">
+										</div>
+									</div>
+									<br>
+
+									<!--Balls setting-->
+									<div align="center">
+
+										<div id="ballsValueBox" class="valueBox" align="center">
+											<img id="ballLogo" src="resources/ball.png">
+											<div id="ballsValue">50</div>
+										</div>
+										<div id="ballsSetting" class="setting" align="center">
+											Choose Number of Balls
+											<input id="numOfBalls" class="slider" type="range" value="50" min="50" max="90" required onchange="updateTextInputBalls(this.value)">
+										</div>
+									</div>
+									<!--					<span class="setting">-->
+									<!--						Choose Number Of Balls [50-90]:-->
+									<!--						<input id="numOfBalls" class="slider" type="range" value="50" min="50" max="90" required onchange="updateTextInputBalls(this.value)">-->
+									<!--						<input type="text" id="ballsInput" value="50">-->
+									<!--						<br>-->
+									<!--					</span>-->
+
+									<!--colors settings-->
+									<div align="center">
+										<h1 id="chooseColors">Choose Colors</h1>
+										<div class="divTable">
+											<div class="divTableBody">
+												<div class="divTableRow">
+													<div class="divTableCell">5 Points Color</div>
+													<div class="divTableCell">15 Points Color</div>
+													<div class="divTableCell">25 Points Color</div>
+												</div>
+												<div class="divTableRow">
+													<div class="divTableCell"><input id="5PointsColor" type="color" required></div>
+													<div class="divTableCell"><input id="15PointsColor" type="color" required></div>
+													<div class="divTableCell"><input id="25PointsColor" type="color" required></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--					<span class="setting">-->
+									<!--						Choose 5 Points Color:-->
+									<!--						<input id="5PointsColor" type="color" required>-->
+									<!--						<br>-->
+									<!--					</span>-->
+									<!--					<span class="setting">-->
+									<!--						Choose 15 Points Color:-->
+									<!--						<input id="15PointsColor" type="color" required>-->
+									<!--						<br>-->
+									<!--					</span>-->
+									<!--					<span class="setting">-->
+									<!--						Choose 25 Points Color:-->
+									<!--						<input id="25PointsColor" type="color" required>-->
+									<!--						<br>-->
+									<!--					</span>-->
+									<br>
+
+									<!--Keys Settings-->
+									<div align="center">
+										<h1>Choose Keys</h1>
+										<div class="divTable">
+											<div class="divTableBody">
+												<div class="divTableRow">
+													<div class="divTableCell"><img src="resources/left.png"></div>
+													<div class="divTableCell"><img src="resources/up.png"></div>
+													<div class="divTableCell"><img src="resources/down.png"></div>
+													<div class="divTableCell"><img src="resources/right.png"></div>
+												</div>
+												<div class="divTableRow">
+													<div class="divTableCell"><input class="keyInput" id="leftKey" placeholder="Move Left" type="text" maxlength="1" onkeypress="updateKey(event,'left')"></div>
+													<div class="divTableCell"><input class="keyInput" id="upKey" placeholder="Move Up" type="text" maxlength="1" onkeypress="updateKey(event,'up')"></div>
+													<div class="divTableCell"><input class="keyInput" id="downKey" placeholder="Move Down" type="text" maxlength="1" onkeypress="updateKey(event,'down')"></div>
+													<div class="divTableCell"><input class="keyInput" id="rightKey" placeholder="Move Right" type="text" maxlength="1" onkeypress="updateKey(event,'right')"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+<!--								<div id="buttonsCell" class="divTableCell">-->
+<!--									<div class="buttonBox">-->
+<!--										<button id="randomBtn" type="button" style="background-image: url(resources/random.png)" title="Random Settings" class="btn" onclick="fillFormRandomly()"></button>-->
+<!--									</div>-->
+<!--									<br>-->
+<!--									<div class="buttonBox">-->
+<!--										<button id="resetBtn" type="reset" style="background-image: url(resources/reset.png)" title="Reset Settings" class="btn" onclick="resetSettings()"></button>-->
+<!--										<br>-->
+<!--										<br>-->
+<!--										<img src="resources/pacmanChar.png">-->
+
+<!--									</div>-->
+<!--								</div>-->
+							</div>
+							<div class="divTableRow" align="center" style="width: 25%">
+								<div class="divTableCell">
+									<div class="buttonBox" style="width: 256px" style="height: 256px">
+										<button id="randomBtn" type="button" style="background-image: url(resources/random.png)" title="Random Settings" class="btn" onclick="fillFormRandomly()"></button>
+									</div>
+								</div>
+								<div class="divTableCell">
+									<div class="buttonBox" style="width: 256px" style="height: 256px">
+										<button id="resetBtn" type="reset" style="background-image: url(resources/reset.png)" title="Reset Settings" class="btn" onclick="resetSettings()"></button>
+									</div>
+								</div>
+								<div class="divTableCell">
+									<div class="buttonBox" style="width: 256px" style="height: 256px">
+										<button id="muteBtn" type="button" style="background-image: url(resources/mute.png)" onclick="muteMusic()" class="btn" ></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!--					<span class="setting">-->
+					<!--						Choose a Key For Moving Up:-->
+					<!--						<input id="upKey" type="text" maxlength="1" onkeypress="updateKey(event,'up')">-->
+					<!--						<br>-->
+					<!--					</span>-->
+					<!--					<span class="setting">-->
+					<!--						Choose a Key For Moving Down:-->
+					<!--						<input id="downKey" type="text" maxlength="1" onkeypress="updateKey(event,'down')">-->
+					<!--						<br>-->
+					<!--					</span>-->
+					<!--					<span class="setting">-->
+					<!--						Choose a Key For Moving Left:-->
+					<!--						<input id="leftKey" type="text" maxlength="1" onkeypress="updateKey(event,'left')">-->
+					<!--						<br>-->
+					<!--					</span>-->
+					<!--					<span class="setting">-->
+					<!--						Choose a Key For Moving Right:-->
+					<!--						<input id="rightKey" type="text" maxlength="1" onkeypress="updateKey(event,'right')">-->
+					<!--						<br>-->
+					<!--					</span>-->
+
+
+					<br>
+				</form>
+				<button type="submit" onclick="startGame()">Start Game</button>
+			</div>
+			<div id="mainContent" class="allDivs" style="display: none" align="center">
+				<div class="divTable">
+					<div class="divTableBody">
+						<div class="divTableRow">
+							<div class="divTableCell" align="center">
+								<label for="lblScore">SCORE:</label>
+								<input id="lblScore" type="text" />
+								<label for="lblTime">TIME:</label>
+								<input id="lblTime" type="text" />
+							</div>
+							<div class="divTableCell">
+								<canvas id="canvas" height="600" width="600"></canvas>
+							</div>
+							<div class="divTableCell" align="center">
+								<ul>
+									<!--							<li> <label>Game Time: </label><input id="inGameTimeInput" type="text" value=""></li>-->
+									<li> <label>Monsters: </label><div id="inGameMonstersInput"></div></li>
+									<li> <label>Balls: </label><div id="inGameBallsInput" ></div></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div id="time">
-					<label for="lblTime">TIME:</label>
-					<input id="lblTime" type="text" />
-				</div>
-				<div id="game">
-					<canvas id="canvas" height="600" width="600"></canvas>
+
 				</div>
 			</div>
 		</div>
 
-		  
-		  
 	</body>
 </html>
