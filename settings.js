@@ -2,20 +2,39 @@ var upKey;
 var downKey;
 var leftKey;
 var rightKey;
-
+var mute=false;
 
 function updateTextInputMonsters(val) {
-    document.getElementById('monstersInput').value=val;
-    document.getElementById('inGameMonstersInput').value=val;
+    //document.getElementById('monstersInput').value=val;
+   // document.getElementById('inGameMonstersInput').value=val;
+    var slider = document.getElementById("numOfMonsters");
+    var monVal = document.getElementById("monstersValue");
+    monVal.innerHTML=val;
+    slider.oninput=function () {
+        monVal.innerHTML=this.value;
+    }
 }
 
 function updateTextInputBalls(val) {
-    document.getElementById('ballsInput').value=val;
-    document.getElementById('inGameBallsInput').value=val;
+    // document.getElementById('ballsInput').value=val;
+    // document.getElementById('inGameBallsInput').value=val;
+    var slider = document.getElementById("numOfBalls");
+    var monVal = document.getElementById("ballsValue");
+    monVal.innerHTML=val;
+    slider.oninput=function () {
+        monVal.innerHTML=this.value;
+    }
 }
 function updateTextInputTime(val) {
-    document.getElementById('timeInput').value=val;
-    document.getElementById('inGameTimeInput').value=val;
+    //document.getElementById('timeInput').value=val;
+    //document.getElementById('inGameTimeInput').value=val;
+    document.getElementById('timeValue').innerHTML=val;
+    var slider = document.getElementById("gameTime");
+    var timeVal = document.getElementById("timeValue");
+    timeVal.innerHTML=val;
+    slider.oninput=function () {
+        timeVal.innerHTML=this.value;
+    }
 }
 
 function updateKey(event, moving) {
@@ -41,18 +60,18 @@ function fillFormRandomly() {
     var y =Math.floor(Math.random()*4)+1;
     var z =Math.floor(Math.random()*(10000-60+1))+60;
     $(document).ready(function(){
-            $('#numOfBalls').val(x);
-            $('#ballsInput').val(x);
-            updateTextInputBalls(x);
-            $('#monstersInput').val(y);
-            $('#numOfMonsters').val(y);
-            updateTextInputMonsters(y)
-            $('#gameTime').val(z);
-            $('#timeInput').val(z);
-            updateTextInputTime(z);
-            $('#5PointsColor').val(getRandomColor());
-            $('#15PointsColor').val(getRandomColor());
-            $('#25PointsColor').val(getRandomColor());
+        $('#gameTime').val(z);
+        $('#timeValue').text(z)
+        $('#numOfMonsters').val(y);
+        $('#monstersValue').text(y)
+        $('#inGameMonstersInput').text(y);
+        $('#numOfBalls').val(x);
+        $('#ballsValue').text(x);
+        $('#inGameBallsInput').text(x);
+        $('#5PointsColor').val(getRandomColor());
+        $('#15PointsColor').val(getRandomColor());
+        $('#25PointsColor').val(getRandomColor());
+
 
     });
     //$('#ballsInput').value = x ;
@@ -67,6 +86,20 @@ function getRandomColor() {
     return color;
 }
 
+function resetSettings() {
+    $('#timeValue').text(60)
+    $('#monstersValue').text(1)
+    $('#ballsValue').text(50);
+}
+function muteMusic(){
+    if(mute){
+        $('#muteBtn').css("background-image","url(resources/unmute.png)");
+        mute=false;
+    }else{
+        $('#muteBtn').css("background-image","url(resources/mute.png)")
+        mute=true;
+    }
+}
 
 function startGame() {
    // document.getElementById('gameSettings').reset();
