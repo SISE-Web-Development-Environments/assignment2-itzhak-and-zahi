@@ -242,17 +242,17 @@
 							<div class="divTableRow" align="center" style="width: 25%">
 								<div class="divTableCell">
 									<div class="buttonBox" style="width: 256px" style="height: 256px">
-										<button id="randomBtn" type="button" style="background-image: url(resources/random.png)" title="Random Settings" class="btn" onclick="fillFormRandomly()"></button>
+										<button id="randomBtn" type="button" style="background-image: url(resources/random.png)" title="Random Settings" class="btnSetting" onclick="fillFormRandomly()"></button>
 									</div>
 								</div>
 								<div class="divTableCell">
 									<div class="buttonBox" style="width: 256px" style="height: 256px">
-										<button id="resetBtn" type="reset" style="background-image: url(resources/reset.png)" title="Reset Settings" class="btn" onclick="resetSettings()"></button>
+										<button id="resetBtn" type="reset" style="background-image: url(resources/reset.png)" title="Reset Settings" class="btnSetting" onclick="resetSettings()"></button>
 									</div>
 								</div>
 								<div class="divTableCell">
 									<div class="buttonBox" style="width: 256px" style="height: 256px">
-										<button id="muteBtn" type="button" style="background-image: url(resources/mute.png)" onclick="muteMusic()" class="btn" ></button>
+										<button id="muteBtn" type="button" style="background-image: url(resources/mute.png)" onclick="muteMusic()" class="btnSetting" ></button>
 									</div>
 								</div>
 							</div>
@@ -287,30 +287,44 @@
 				<button class="start" type="submit" onclick="startGame()">Start Game</button>
 			</div>
 			<div id="mainContent" class="allDivs" style="display: none" align="center">
-				<div class="divTable">
-					<div class="divTableBody">
-						<div class="divTableRow">
-							<div class="divTableCell" align="center">
-								<label for="lblScore">SCORE:</label>
-								<input id="lblScore" type="text" />
-								<label for="lblTime">TIME:</label>
-								<input id="lblTime" type="text" />
-							</div>
-							<div class="divTableCell">
-								<canvas id="canvas" height="600" width="600"></canvas>
-							</div>
-							<div class="divTableCell" align="center">
-								<ul>
-									<!--							<li> <label>Game Time: </label><input id="inGameTimeInput" type="text" value=""></li>-->
-									<li> <label>Monsters: </label><div id="inGameMonstersInput"></div></li>
-									<li> <label>Balls: </label><div id="inGameBallsInput" ></div></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
+				<table class="tg" id="leftSetting">
+					<tr>
+						<th class="tg-0lax">
+							<label style="color: #f1f1f1" for="lblScore">SCORE:</label>
+							<input id="lblScore" type="text" />
+						</th>
+					</tr>
+					<tr>
+						<td class="tg-0lax">
+							<label style="color: #f1f1f1" for="lblTime">TIME:</label>
+							<input id="lblTime" type="text" />
+						</td>
+					</tr>
+					<tr>
+						<td class="tg-0lax">
+							<label style="color: #f1f1f1" for="lblTime">LIFE:</label>
+							<div id="life" style="color: #f1f1f1">5</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="tg-0lax"></td>
+					</tr>
+					<tr>
+						<td class="tg-0lax"></td>
+					</tr>
+					<tr>
+						<td class="tg-0lax"></td>
+					</tr>
+				</table>
 
+				<div id="pacmanGame"></div>
+				<canvas id="canvas" height="800" width="800" style="margin: auto"></canvas>
+				<div id="endOfTheGame" style="display: none">
+					<button style="color: #f1f1f1" onclick="changeDisplay(document.getElementById('settingPage'))">New Game</button>
 				</div>
+					 <label>Monsters: </label><div id="inGameMonstersInput"></div>
+					 <label>Balls: </label><div id="inGameBallsInput" ></div>
+
 			</div>
 		</div>
 
