@@ -91,6 +91,8 @@ function resetSettings() {
     $('#timeValue').text(60)
     $('#monstersValue').text(1)
     $('#ballsValue').text(50);
+    document.getElementById("gameSettings").reset();
+
 }
 function muteMusic(){
     if(mute){
