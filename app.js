@@ -15,6 +15,7 @@ var interval;
 var intervalMon;
 var monsterPattern = 0;
 var cherryInterval;
+var cherryInterval2;
 
 function startAfterFail() {
 	let life = parseInt($('#life').text());
@@ -164,7 +165,7 @@ function startAfterFail() {
 	cherry.j = cherryPos[1];
 	board[cherry.i][cherry.j]=13;
 	cherry.whatWas =0;
-	cherryInterval =setInterval(UpdateCherryPosition,500);
+	cherryInterval2 =setInterval(UpdateCherryPosition,350);
 	Draw();
 
 }
@@ -173,7 +174,6 @@ function Start() {
 	$('#life').text('5');
 	context = canvas.getContext("2d");
 	board = new Array();
-	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
 	var food_remain = $('#numOfBalls').val();
@@ -332,7 +332,7 @@ function Start() {
 		false
 	);
 
-	cherryInterval = setInterval(UpdateCherryPosition,500);
+	cherryInterval = setInterval(UpdateCherryPosition,350);
 	interval = setInterval(UpdatePosition, 130);
 	intervalMon = setInterval(UpdatePositionForMonster, 270);
 }
@@ -462,6 +462,14 @@ function Draw() {
 
 function UpdatePosition() {
 
+	if(board[shape.i][shape.j] === 3){
+		score = score + 15;
+	}else if(board[shape.i][shape.j] === 5){
+		score = score + 25;
+	}else if (board[shape.i][shape.j] === 1) {
+		score = score + 5;
+	}
+
 	var x = GetKeyPressed();
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
@@ -491,24 +499,15 @@ function UpdatePosition() {
 			board[shape.i][shape.j] = 2;
 		}
 	}
-	//board[i][j] = 0;
 	if(board[shape.i][shape.j]===13) {
-		score = score + 50;
 		//alert("FAS");
-		clearInterval(cherryInterval);
-		cherryInterval.stop();
-	} else if(board[shape.i][shape.j] == 3){
-		score = score + 15;
-	}else if(board[shape.i][shape.j] == 5){
-		score = score + 25;
-	} else if(board[shape.i][shape.j]===13){
-		score = score +50;
-		alert("FAS");
-		clearInterval(cherryInterval);
-		cherryInterval.stop();
-	}else if (board[shape.i][shape.j] == 1) {
-	score = score + 5;
+		board[shape.i][shape.j]=0;
+		score = score + 50;
+		window.clearInterval(cherryInterval);
+		window.clearInterval(cherryInterval2);
+		//cherryInterval.stop();
 	}
+	//board[i][j] = 0;
 
 	let life = parseInt($('#life').text());
 	if (life !== 0) {
@@ -525,6 +524,7 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 
+	$('#lblScore').text(score);
 	// if (score == 50) {
 	// 	window.clearInterval(interval);
 	// 	window.alert("Game completed");
@@ -543,12 +543,13 @@ window.addEventListener("keydown",function (e) {
 
 function UpdateCherryPosition() {
 	var random = Math.random();
+	let cherryWhatWas = cherry.whatWas;
 	if(random>0&&random<0.25){
 		if(cherry.i<11&&board[cherry.i+1][cherry.j]!==4){
-			if(cherry.whatWas ===13) {
+			if((cherryWhatWas > 5 && cherryWhatWas < 14) ||  cherryWhatWas === 2) {
 				board[cherry.i][cherry.j] = 0;
 			}else{
-				board[cherry.i][cherry.j] = cherry.whatWas;
+				board[cherry.i][cherry.j] = cherryWhatWas;
 			}
 				cherry.whatWas = board[cherry.i + 1][cherry.j];
 				board[cherry.i + 1][cherry.j] = 13;
@@ -557,10 +558,10 @@ function UpdateCherryPosition() {
 	}
 	else if(random>0.25&&random<0.5){
 		if(cherry.i>0&&board[cherry.i-1][cherry.j]!==4){
-			if(cherry.whatWas ===13) {
+			if((cherryWhatWas > 5 && cherryWhatWas < 14) ||  cherryWhatWas === 2) {
 				board[cherry.i][cherry.j] = 0
 			}else{
-				board[cherry.i][cherry.j] = cherry.whatWas;
+				board[cherry.i][cherry.j] = cherryWhatWas;
 			}
 			cherry.whatWas = board[cherry.i-1][cherry.j];
 			board[cherry.i-1][cherry.j]=13;
@@ -568,28 +569,36 @@ function UpdateCherryPosition() {
 		}
 	}else if(random>0.5&&random<0.75){
 		if(cherry.j<11&&board[cherry.i][cherry.j+1]!==4){
-			if(cherry.whatWas ===13) {
+			if((cherryWhatWas > 5 && cherryWhatWas < 14) ||  cherryWhatWas === 2) {
 				board[cherry.i][cherry.j] = 0;
 			}else{
-				board[cherry.i][cherry.j] = cherry.whatWas;
+				board[cherry.i][cherry.j] = cherryWhatWas;
 			}
 			cherry.whatWas = board[cherry.i][cherry.j+1];
 			board[cherry.i][cherry.j+1]=13;
 			cherry.j=cherry.j+1;
 		}
-	}if(random>0.75){
+	}else if(random>0.75){
 		if(cherry.j>0&&board[cherry.i][cherry.j-1]!==4){
-			if(cherry.whatWas ===13) {
+			if((cherryWhatWas > 5 && cherryWhatWas < 14) ||  cherryWhatWas === 2) {
 				board[cherry.i][cherry.j] = 0;
 			}else{
-				board[cherry.i][cherry.j] = cherry.whatWas;
+				board[cherry.i][cherry.j] = cherryWhatWas;
 			}
 			cherry.whatWas = board[cherry.i][cherry.j-1];
 			board[cherry.i][cherry.j-1]=13;
 			cherry.j=cherry.j-1;
 		}
 	}
-
+	if(board[shape.i][shape.j]===13) {
+		//alert("FAS");
+		board[shape.i][shape.j]=0;
+		score = score + 50;
+		window.clearInterval(cherryInterval);
+		window.clearInterval(cherryInterval2);
+		//cherryInterval.stop();
+	}
+	Draw();
 }
 function UpdatePositionForMonster() {
 
@@ -598,8 +607,8 @@ function UpdatePositionForMonster() {
 		var whatWas = monsterArr[i].WhatWasInTheCellBefore;
 
 		monsterArr[i].WhatWasInTheCellBefore = board[placeToGo[0]][placeToGo[1]];
-		board[placeToGo[0]][placeToGo[1]]=6+i;
 		if(!(placeToGo[0] === monsterArr[i].i && placeToGo[1] === monsterArr[i].j)){
+			board[placeToGo[0]][placeToGo[1]]=6+i;
 			if((whatWas === 6 || whatWas === 7 || whatWas === 8 || whatWas === 9 || whatWas===13)){
 				board[monsterArr[i].i][monsterArr[i].j]=0;
 			}else{
@@ -609,6 +618,7 @@ function UpdatePositionForMonster() {
 			monsterArr[i].j = placeToGo[1];
 
 		}
+		Draw();
 		 if (monsterArr[i].i === shape.i && monsterArr[i].j === shape.j){
 		 	let life = parseInt($('#life').text());
 		 	if (life === 1){
@@ -717,4 +727,15 @@ function findWhereToGo(x,y) {
 	monsterPattern++;
 
 	return[x,y]
+}
+
+
+function stopp(){
+	alert(hihi);
+	clearInterval(intervalMon);
+	clearInterval(interval);
+	clearInterval(cherryInterval);
+	intervalMon.stop();
+	interval.stop();
+	cherryInterval.stop();
 }
