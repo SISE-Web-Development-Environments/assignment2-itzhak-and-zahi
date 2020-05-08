@@ -18,199 +18,208 @@ var monsterPattern = 0;
 var cherryInterval;
 var cherryInterval2;
 var healthInterval;
+var firstTime=true;
 
-function startAfterFail() {
-	let life = parseInt($('#life').text());
-	context = canvas.getContext("2d");
-	life--;
+// function startAfterFail() {
+// 	let life = parseInt($('#life').text());
+// 	context = canvas.getContext("2d");
+// 	life--;
+// 	$('#life').text(life);
+// 	updateHealthBar(life);
+// 	board = new Array();
+// 	score = 0;
+// 	pac_color = "yellow";
+// 	var cnt = 100;
+// 	var food_remain = $('#numOfBalls').val();
+// 	var five_remain = Math.floor(food_remain * 60/100);
+// 	var fifteen_remain = Math.floor(food_remain * 30/100);
+// 	var twenty_five_remain = Math.floor(food_remain * 10/100);
+// 	if (five_remain + fifteen_remain + twenty_five_remain != food_remain){
+// 		twenty_five_remain++;
+// 	}
+// 	var pacman_remain = 1;
+// 	// start_time = new Date();
+// 	for (var i = 0; i < 12; i++) {
+// 		board[i] = new Array();
+// 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
+// 		for (var j = 0; j < 12; j++) {
+// 			if (
+// 				(i == 3 && j == 3) ||
+// 				(i == 3 && j == 4) ||
+// 				(i == 3 && j == 5) ||
+// 				(i == 6 && j == 1) ||
+// 				(i == 6 && j == 2)
+// 			) {
+// 				board[i][j] = 4;
+// 			} else {
+// 				var randomNum = Math.random();
+// 				if (randomNum <= (1.0 * food_remain) / cnt) {
+// 					let randomNumFood = (Math.floor(Math.random() * 4) +1);
+// 					if (randomNumFood === 1 && five_remain > 0 ) {
+// 						five_remain--;
+// 						food_remain--;
+// 						board[i][j] = 1;
+// 					}else if (randomNumFood === 2 && fifteen_remain > 0 ) {
+// 						/** 5 point - 1    15 point - 3      25 point - 5  */
+// 						fifteen_remain--;
+// 						food_remain--;
+// 						board[i][j] = 3;
+// 					} else if (randomNumFood === 3 && twenty_five_remain > 0) {
+// 						twenty_five_remain--;
+// 						food_remain--;
+// 						board[i][j] = 5;
+// 					}
+// 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+// 					// shape.i = 0;
+// 					// shape.j = 5;
+// 					// pacman_remain--;
+// 					// board[0][5] = 2;
+// 				} else {
+// 					board[i][j] = 0;
+// 				}
+// 				cnt--;
+// 			}
+//
+// 		}
+// 	}
+//
+//
+//
+//
+// 	while (food_remain > 0) {
+// 		var emptyCell = findRandomEmptyCell(board);
+// 		if ( twenty_five_remain > 0){
+// 			board[emptyCell[0]][emptyCell[1]] = 5;
+// 			twenty_five_remain--;
+// 		}else if ( fifteen_remain > 0){
+// 			board[emptyCell[0]][emptyCell[1]] = 3;
+// 			fifteen_remain--;
+// 		}else if ( five_remain > 0){
+// 			five_remain--;
+// 			board[emptyCell[0]][emptyCell[1]] = 1;
+//
+// 		}
+// 		food_remain--;
+// 	}
+//
+// 	let numOfMonsters = $('#numOfMonsters').val();
+// 	switch (numOfMonsters) {
+// 		case "1":
+// 			board[0][0] = 6;
+// 			monster1.i = 0;
+// 			monster1.j = 0;
+// 			monster1.WhatWasInTheCellBefore = 0
+// 			monsterArr = [monster1];
+// 			break;
+// 		case "2":
+// 			board[0][0] = 6;
+// 			monster1.i = 0;
+// 			monster1.j = 0;
+// 			board[11][11] = 7;
+// 			monster2.i = 11;
+// 			monster2.j = 11;
+// 			monster1.WhatWasInTheCellBefore = 0
+// 			monster2.WhatWasInTheCellBefore = 0
+// 			monsterArr = [monster1,monster2];
+// 			break;
+// 		case "3":
+// 			board[0][0] = 6;
+// 			monster1.i = 0;
+// 			monster1.j = 0;
+// 			board[11][11] = 7;
+// 			monster2.i = 11;
+// 			monster2.j = 11;
+// 			board[0][11] = 8;
+// 			monster3.i = 0;
+// 			monster3.j = 11;
+// 			monster1.WhatWasInTheCellBefore = 0
+// 			monster2.WhatWasInTheCellBefore = 0
+// 			monster3.WhatWasInTheCellBefore = 0
+// 			monsterArr = [monster1,monster2,monster3];
+// 			break;
+// 		case "4":
+// 			board[0][0] = 6;
+// 			monster1.i = 0;
+// 			monster1.j = 0;
+// 			board[11][11] = 7;
+// 			monster2.i = 11;
+// 			monster2.j = 11;
+// 			board[0][11] = 8;
+// 			monster3.i = 0;
+// 			monster3.j = 11;
+// 			board[11][0] = 9;
+// 			monster4.i = 11;
+// 			monster4.j = 0;
+// 			monster1.WhatWasInTheCellBefore = 0
+// 			monster2.WhatWasInTheCellBefore = 0
+// 			monster3.WhatWasInTheCellBefore = 0
+// 			monster4.WhatWasInTheCellBefore = 0
+// 			monsterArr = [monster1,monster2,monster3,monster4];
+// 			break;
+// 	}
+//
+//
+// 	var pacmanPos = findRandomEmptyCell(board);
+// 	shape.i=pacmanPos[0];
+// 	shape.j=pacmanPos[1];
+// 	board[shape.i][shape.j]=2;
+//
+// 	var cherryPos = findRandomEmptyCell(board);
+// 	cherry.i = cherryPos[0];
+// 	cherry.j = cherryPos[1];
+// 	board[cherry.i][cherry.j]=13;
+// 	cherry.whatWas =0;
+//
+// 	var extraLifePos = findRandomEmptyCell(board);
+// 	extraLife.i=extraLifePos[0];
+// 	extraLife.j=extraLifePos[0];
+// 	board[extraLife.i][extraLife.j]=15;
+//
+//
+// 	cherryInterval2 =setInterval(UpdateCherryPosition,350);
+// 	healthInterval =setInterval(updateExtraLife,4000);
+// 	Draw();
+//
+// }
+function Start() {
+	if(firstTime) {
+		$('#life').text('5');
+		updateHealthBar(5);
+		var currentTimeLeft = setInterval(function(){
+			if(timeLeft <= 0){
+				if(parseInt($('#lblScore').text())>100){
+					window.alert("Winner");
+				}else{
+					window.alert("Youre better than " + $('#lblScore').text() + " points!!");
+				}
+
+				//$('#endOfTheGame').text("LOSER");
+				changeDisplay(document.getElementById("settingPage"));
+				resetSettings();
+				clearInterval(currentTimeLeft);
+				window.clearInterval(interval);
+				clearInterval(cherryInterval);
+				window.clearInterval(intervalMon);
+				intervalMon.stop();
+				cherryInterval.stop();
+				interval.stop();
+
+			}
+			timeLeft -= 1;
+			$('#lblTime').text(timeLeft);
+		}, 1000);
+		firstTime=false;
+	}else{
+		let life = parseInt($('#life').text());
+		life--;
 	$('#life').text(life);
 	updateHealthBar(life);
-	board = new Array();
-	score = 0;
-	pac_color = "yellow";
-	var cnt = 100;
-	var food_remain = $('#numOfBalls').val();
-	var five_remain = Math.floor(food_remain * 60/100);
-	var fifteen_remain = Math.floor(food_remain * 30/100);
-	var twenty_five_remain = Math.floor(food_remain * 10/100);
-	if (five_remain + fifteen_remain + twenty_five_remain != food_remain){
-		twenty_five_remain++;
 	}
-	var pacman_remain = 1;
-	// start_time = new Date();
-	for (var i = 0; i < 12; i++) {
-		board[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 12; j++) {
-			if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
-			) {
-				board[i][j] = 4;
-			} else {
-				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					let randomNumFood = (Math.floor(Math.random() * 4) +1);
-					if (randomNumFood === 1 && five_remain > 0 ) {
-						five_remain--;
-						food_remain--;
-						board[i][j] = 1;
-					}else if (randomNumFood === 2 && fifteen_remain > 0 ) {
-						/** 5 point - 1    15 point - 3      25 point - 5  */
-						fifteen_remain--;
-						food_remain--;
-						board[i][j] = 3;
-					} else if (randomNumFood === 3 && twenty_five_remain > 0) {
-						twenty_five_remain--;
-						food_remain--;
-						board[i][j] = 5;
-					}
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-					// shape.i = 0;
-					// shape.j = 5;
-					// pacman_remain--;
-					// board[0][5] = 2;
-				} else {
-					board[i][j] = 0;
-				}
-				cnt--;
-			}
-
-		}
-	}
-
-
-
-
-	while (food_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
-		if ( twenty_five_remain > 0){
-			board[emptyCell[0]][emptyCell[1]] = 5;
-			twenty_five_remain--;
-		}else if ( fifteen_remain > 0){
-			board[emptyCell[0]][emptyCell[1]] = 3;
-			fifteen_remain--;
-		}else if ( five_remain > 0){
-			five_remain--;
-			board[emptyCell[0]][emptyCell[1]] = 1;
-
-		}
-		food_remain--;
-	}
-
-	let numOfMonsters = $('#numOfMonsters').val();
-	switch (numOfMonsters) {
-		case "1":
-			board[0][0] = 6;
-			monster1.i = 0;
-			monster1.j = 0;
-			monster1.WhatWasInTheCellBefore = 0
-			monsterArr = [monster1];
-			break;
-		case "2":
-			board[0][0] = 6;
-			monster1.i = 0;
-			monster1.j = 0;
-			board[11][11] = 7;
-			monster2.i = 11;
-			monster2.j = 11;
-			monster1.WhatWasInTheCellBefore = 0
-			monster2.WhatWasInTheCellBefore = 0
-			monsterArr = [monster1,monster2];
-			break;
-		case "3":
-			board[0][0] = 6;
-			monster1.i = 0;
-			monster1.j = 0;
-			board[11][11] = 7;
-			monster2.i = 11;
-			monster2.j = 11;
-			board[0][11] = 8;
-			monster3.i = 0;
-			monster3.j = 11;
-			monster1.WhatWasInTheCellBefore = 0
-			monster2.WhatWasInTheCellBefore = 0
-			monster3.WhatWasInTheCellBefore = 0
-			monsterArr = [monster1,monster2,monster3];
-			break;
-		case "4":
-			board[0][0] = 6;
-			monster1.i = 0;
-			monster1.j = 0;
-			board[11][11] = 7;
-			monster2.i = 11;
-			monster2.j = 11;
-			board[0][11] = 8;
-			monster3.i = 0;
-			monster3.j = 11;
-			board[11][0] = 9;
-			monster4.i = 11;
-			monster4.j = 0;
-			monster1.WhatWasInTheCellBefore = 0
-			monster2.WhatWasInTheCellBefore = 0
-			monster3.WhatWasInTheCellBefore = 0
-			monster4.WhatWasInTheCellBefore = 0
-			monsterArr = [monster1,monster2,monster3,monster4];
-			break;
-	}
-
-
-	var pacmanPos = findRandomEmptyCell(board);
-	shape.i=pacmanPos[0];
-	shape.j=pacmanPos[1];
-	board[shape.i][shape.j]=2;
-
-	var cherryPos = findRandomEmptyCell(board);
-	cherry.i = cherryPos[0];
-	cherry.j = cherryPos[1];
-	board[cherry.i][cherry.j]=13;
-	cherry.whatWas =0;
-
-	var extraLifePos = findRandomEmptyCell(board);
-	extraLife.i=extraLifePos[0];
-	extraLife.j=extraLifePos[0];
-	board[extraLife.i][extraLife.j]=15;
-
-
-	cherryInterval2 =setInterval(UpdateCherryPosition,350);
-	healthInterval =setInterval(updateExtraLife,4000);
-	Draw();
-
-}
-function Start() {
-
-	$('#life').text('5');
-	updateHealthBar(5);
 	context = canvas.getContext("2d");
 	board = new Array();
 	pac_color = "yellow";
 	var timeLeft = parseInt($('#timeValue').text());
-	var currentTimeLeft = setInterval(function(){
-		if(timeLeft <= 0){
-			if(parseInt($('#lblScore').text())>100){
-				window.alert("Winner");
-			}else{
-				window.alert("Youre better than " + $('#lblScore').text() + " points!!");
-			}
 
-			//$('#endOfTheGame').text("LOSER");
-			changeDisplay(document.getElementById("settingPage"));
-			resetSettings();
-			clearInterval(currentTimeLeft);
-			window.clearInterval(interval);
-			clearInterval(cherryInterval);
-			window.clearInterval(intervalMon);
-			intervalMon.stop();
-			cherryInterval.stop();
-			interval.stop();
-
-		}
-		timeLeft -= 1;
-		$('#lblTime').text(timeLeft);
-	}, 1000);
 	var cnt = 100;
 	var food_remain = $('#numOfBalls').val();
 	var five_remain = Math.floor(food_remain * 60/100);
@@ -627,10 +636,10 @@ function UpdatePosition() {
 	}else{
 		window.clearInterval(interval);
 		window.clearInterval(intervalMon);
-		interval.stop();
+		//interval.stop();
 		clearInterval(cherryInterval);
-		cherryInterval.stop();
-		intervalMon.stop();
+		//cherryInterval.stop();
+		//intervalMon.stop();
 	}
 	//var currentTime = new Date();
 	//time_elapsed = (currentTime - start_time) / 1000;
@@ -767,22 +776,24 @@ function UpdatePositionForMonster() {
 				window.clearInterval(interval);
 				clearInterval(cherryInterval);
 				window.clearInterval(intervalMon);
-				intervalMon.stop();
-				cherryInterval.stop();
-				interval.stop();
+				window.clearInterval(healthInterval);
+
 			}else if(life === 0){
 				//var context
+				firstTime=true;
 				clearInterval(cherryInterval);
 				window.clearInterval(interval);
 				window.clearInterval(intervalMon);
-				interval.stop();
-				cherryInterval.stop();
-				intervalMon.stop();
+				window.clearInterval(healthInterval);
 			}
 		 	else{
+				clearInterval(cherryInterval);
+				window.clearInterval(interval);
+				window.clearInterval(intervalMon);
+				window.clearInterval(healthInterval);
 		 		// life--;
 		 		// $('#life').text(life);
-				startAfterFail();
+				Start();
 			}
 		 }
 
