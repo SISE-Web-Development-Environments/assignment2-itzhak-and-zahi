@@ -892,6 +892,7 @@ function UpdatePositionForMonster() {
 		 		if(newMonsterExist){
 		 			newMonsterExist = false;
 		 			board[newMonster.i][newMonster.j]=0;
+
 				}
 				clearInterval(cherryInterval);
 				window.clearInterval(interval);
