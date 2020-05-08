@@ -505,6 +505,10 @@ li a {
   font-family: "Lucida Sans",sans-serif;
   border-bottom: 5px solid red;
 }
+
+#healthBar{
+    border: solid 1px white;
+}
 /*
 .buttonBox {
   position: relative;

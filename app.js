@@ -6,6 +6,7 @@ var monster3 = new Object();
 var monster4 = new Object();
 var monsterArr = new Array();
 var cherry = new Object();
+var extraLife = new Object();
 var board;
 var score;
 var pac_color;
@@ -16,12 +17,14 @@ var intervalMon;
 var monsterPattern = 0;
 var cherryInterval;
 var cherryInterval2;
+var healthInterval;
 
 function startAfterFail() {
 	let life = parseInt($('#life').text());
 	context = canvas.getContext("2d");
 	life--;
 	$('#life').text(life);
+	updateHealthBar(life);
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -34,7 +37,7 @@ function startAfterFail() {
 		twenty_five_remain++;
 	}
 	var pacman_remain = 1;
-	start_time = new Date();
+	// start_time = new Date();
 	for (var i = 0; i < 12; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -165,16 +168,49 @@ function startAfterFail() {
 	cherry.j = cherryPos[1];
 	board[cherry.i][cherry.j]=13;
 	cherry.whatWas =0;
+
+	var extraLifePos = findRandomEmptyCell(board);
+	extraLife.i=extraLifePos[0];
+	extraLife.j=extraLifePos[0];
+	board[extraLife.i][extraLife.j]=15;
+
+
 	cherryInterval2 =setInterval(UpdateCherryPosition,350);
+	healthInterval =setInterval(updateExtraLife,4000);
 	Draw();
 
 }
 function Start() {
 
 	$('#life').text('5');
+	updateHealthBar(5);
 	context = canvas.getContext("2d");
 	board = new Array();
 	pac_color = "yellow";
+	var timeLeft = parseInt($('#timeValue').text());
+	var currentTimeLeft = setInterval(function(){
+		if(timeLeft <= 0){
+			if(parseInt($('#lblScore').text())>100){
+				window.alert("Winner");
+			}else{
+				window.alert("Youre better than " + $('#lblScore').text() + " points!!");
+			}
+
+			//$('#endOfTheGame').text("LOSER");
+			changeDisplay(document.getElementById("settingPage"));
+			resetSettings();
+			clearInterval(currentTimeLeft);
+			window.clearInterval(interval);
+			clearInterval(cherryInterval);
+			window.clearInterval(intervalMon);
+			intervalMon.stop();
+			cherryInterval.stop();
+			interval.stop();
+
+		}
+		timeLeft -= 1;
+		$('#lblTime').text(timeLeft);
+	}, 1000);
 	var cnt = 100;
 	var food_remain = $('#numOfBalls').val();
 	var five_remain = Math.floor(food_remain * 60/100);
@@ -184,7 +220,7 @@ function Start() {
 		twenty_five_remain++;
 	}
 	var pacman_remain = 1;
-	start_time = new Date();
+	// start_time = new Date();
 	for (var i = 0; i < 12; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -315,6 +351,11 @@ function Start() {
 	cherry.j = cherryPos[1];
 	board[cherry.i][cherry.j]=13;
 	cherry.whatWas =0;
+
+	var extraLifePos = findRandomEmptyCell(board);
+	extraLife.i=extraLifePos[0];
+	extraLife.j=extraLifePos[0];
+	board[extraLife.i][extraLife.j]=15;
 
 	keysDown = {};
 	addEventListener(
@@ -331,7 +372,7 @@ function Start() {
 		},
 		false
 	);
-
+	healthInterval =setInterval(updateExtraLife,4000);
 	cherryInterval = setInterval(UpdateCherryPosition,350);
 	interval = setInterval(UpdatePosition, 130);
 	intervalMon = setInterval(UpdatePositionForMonster, 270);
@@ -365,7 +406,7 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	//lblTime.value = time_elapsed;
 	for (var i = 0; i < 12; i++) {
 		for (var j = 0; j < 12; j++) {
 			var center = new Object();
@@ -393,6 +434,10 @@ function Draw() {
 			}else if (board[i][j] === 13){
 				let img = new Image(10,10);
 				img.src = "resources/cherry.png"
+				context.drawImage(img, i*60, j*60);
+			}else if (board[i][j] === 15){
+				let img = new Image(10,10);
+				img.src = "resources/life.png"
 				context.drawImage(img, i*60, j*60);
 			}
 			if (board[i][j] == 2) {  /**right*/
@@ -462,24 +507,61 @@ function Draw() {
 
 function UpdatePosition() {
 
-	if(board[shape.i][shape.j] === 3){
+	if(board[shape.i][shape.j-1] === 3){
 		score = score + 15;
-	}else if(board[shape.i][shape.j] === 5){
+	}else if(board[shape.i][shape.j-1] === 5){
 		score = score + 25;
-	}else if (board[shape.i][shape.j] === 1) {
+	}else if (board[shape.i][shape.j-1] === 1) {
 		score = score + 5;
+	}else if(board[shape.i][shape.j-1]===15){
+		let life = parseInt($('#life').text());
+		if(life<5) {
+			life++;
+		}
+		$('#life').text(life);
+		updateHealthBar(life);
+		window.clearInterval(healthInterval);
 	}
-
 	var x = GetKeyPressed();
 	if (x == 1) {
+
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+			/****MAYBE????? COS IMA SHAL ZA
+			if(board[shape.i][shape.j-1] === 3){
+				score = score + 15;
+			}else if(board[shape.i][shape.j-1] === 5){
+				score = score + 25;
+			}else if (board[shape.i][shape.j-1] === 1) {
+				score = score + 5;
+			}else if(board[shape.i][shape.j-1]===15){
+				let life = parseInt($('#life').text());
+				life--;
+				$('#life').text(life);
+				updateHealthBar(life);
+			}
+			 */
 			board[shape.i][shape.j] = 0;
 			shape.j--;
 			board[shape.i][shape.j] = 11;
 		}
 	}
 	if (x == 2) {
+
 		if (shape.j < 11 && board[shape.i][shape.j + 1] != 4) {
+			/****
+			if(board[shape.i][shape.j+1] === 3){
+				score = score + 15;
+			}else if(board[shape.i][shape.j+1] === 5){
+				score = score + 25;
+			}else if (board[shape.i][shape.j+1] === 1) {
+				score = score + 5;
+			}else if(board[shape.i][shape.j+1]===15){
+				let life = parseInt($('#life').text());
+				life--;
+				$('#life').text(life);
+				updateHealthBar(life);
+			}
+			 */
 			board[shape.i][shape.j] = 0;
 			shape.j++;
 			board[shape.i][shape.j] = 12;
@@ -487,6 +569,20 @@ function UpdatePosition() {
 	}
 	if (x == 3) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+			/****
+			if(board[shape.i-1][shape.j] === 3){
+				score = score + 15;
+			}else if(board[shape.i-1][shape.j] === 5){
+				score = score + 25;
+			}else if (board[shape.i-1][shape.j] === 1) {
+				score = score + 5;
+			}else if(board[shape.i-1][shape.j]===15){
+				let life = parseInt($('#life').text());
+				life--;
+				$('#life').text(life);
+				updateHealthBar(life);
+			}
+			 */
 			board[shape.i][shape.j] = 0;
 			shape.i--;
 			board[shape.i][shape.j] = 10;
@@ -494,6 +590,20 @@ function UpdatePosition() {
 	}
 	if (x == 4) {
 		if (shape.i < 11 && board[shape.i + 1][shape.j] != 4) {
+			/****
+			if(board[shape.i+1][shape.j] === 3){
+				score = score + 15;
+			}else if(board[shape.i+1][shape.j] === 5){
+				score = score + 25;
+			}else if (board[shape.i+1][shape.j] === 1) {
+				score = score + 5;
+			}else if(board[shape.i+1][shape.j]===15){
+				let life = parseInt($('#life').text());
+				life--;
+				$('#life').text(life);
+				updateHealthBar(life);
+			}
+			 */
 			board[shape.i][shape.j] = 0;
 			shape.i++;
 			board[shape.i][shape.j] = 2;
@@ -509,6 +619,7 @@ function UpdatePosition() {
 	}
 	//board[i][j] = 0;
 
+
 	let life = parseInt($('#life').text());
 	if (life !== 0) {
 
@@ -521,8 +632,8 @@ function UpdatePosition() {
 		cherryInterval.stop();
 		intervalMon.stop();
 	}
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
+	//var currentTime = new Date();
+	//time_elapsed = (currentTime - start_time) / 1000;
 
 	$('#lblScore').text(score);
 	// if (score == 50) {
@@ -539,7 +650,32 @@ window.addEventListener("keydown",function (e) {
 },false);
 
 
+function updateExtraLife() {
+	board[extraLife.i][extraLife.j]=0;
+	var extraLifePos = findRandomEmptyCell(board);
+	extraLife.i=extraLifePos[0];
 
+	extraLife.j=extraLifePos[0];
+	board[extraLife.i][extraLife.j]=15;
+
+}
+function updateHealthBar(life) {
+	switch (life) {
+		case 0: $('#healthBar').attr("src","resources/health0.png")
+			break;
+		case 1: $('#healthBar').attr("src","resources/health1.png")
+			break;
+		case 2: $('#healthBar').attr("src","resources/health2.png")
+			break;
+		case 3: $('#healthBar').attr("src","resources/health3.png")
+			break;
+		case 4: $('#healthBar').attr("src","resources/health4.png")
+			break;
+		case 5: $('#healthBar').attr("src","resources/health5.png")
+			break;
+	}
+
+}
 
 function UpdateCherryPosition() {
 	var random = Math.random();
