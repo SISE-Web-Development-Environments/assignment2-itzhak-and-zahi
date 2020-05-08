@@ -286,44 +286,84 @@
 				<button class="start" type="submit" onclick="startGame()">Start Game</button>
 			</div>
 			<div id="mainContent" class="allDivs" style="display: none" align="center">
-				<table class="tg" id="leftSetting">
-					<tr>
-						<td class="tg-0lax">
-							<label style="color: #f1f1f1" for="lblTime">LIFE:</label>
-							<div id="life" style="color: #f1f1f1">5</div>
-							<img src="resources/health5.png" id="healthBar">
-						</td>
+				<div align="center">
+					<div class="tg" id="leftSetting" align="center">
+						<div class="divTableRowG">
+							<div class="divTableCellG">
+								<img src="resources/heart.png">
+							</div>
+							<div class="divTableCellG">
+								<label style="color: #f1f1f1" for="lblTime">LIFE:</label>
+							</div>
+							<div class="divTableCellG">
+								<div id="life" style="color: #f1f1f1">5</div>
+							</div>
+						</div>
+						<div class="divTableRowG">
+							<div class="divTableCellG">
+								<img src="resources/clock2.png">
+							</div>
+							<div class="divTableCellG">
+								<label style="color: #f1f1f1" for="lblTime">TIME:</label>
+							</div>
+							<div class="divTableCell">
+								<div id="lblTime"  style="color: #f1f1f1"></div>
+							</div>
+						</div>
+						<div class="divTableRowG">
+							<div class="divTableCellG">
+								<img src="resources/ball.png">
+							</div>
+							<div class="divTableCellG">
+								<label style="color: #f1f1f1" for="lblScore">SCORE:</label>
+							</div>
+							<div class="divTableCellG">
+								<div id="lblScore" style="color: #f1f1f1" >0</div>
+							</div>
+						</div>
 
-					</tr>
-					<tr>
-						<td class="tg-0lax">
-							<label style="color: #f1f1f1" for="lblTime">TIME:</label>
-							<div id="lblTime"  style="color: #f1f1f1"></div>
-						</td>
-					</tr>
-					<tr>
-						<th class="tg-0lax">
-							<label style="color: #f1f1f1" for="lblScore">SCORE:</label>
-							<div id="lblScore" style="color: #f1f1f1" >0</div>
-						</th>
-					</tr>
-					<tr>
-						<td class="tg-0lax">
-							<button style="color: #f1f1f1" onclick="stopp()">stop</button>
-						</td>
-					</tr>
-					<tr>
-						<td class="tg-0lax"></td>
-					</tr>
-					<tr>
-						<td class="tg-0lax"></td>
-					</tr>
-				</table>
 
-				<div id="pacmanGame"></div>
-				<canvas id="canvas" height="800" width="800" style="margin: auto"></canvas>
-					 <label>Monsters: </label><div id="inGameMonstersInput"></div>
-					 <label>Balls: </label><div id="inGameBallsInput" ></div>
+					</div>
+				</div>
+
+				<div id="pacmanGame" class="tg">
+				<canvas id="canvas" height="725" width="725" style="margin-top:  40px"></canvas>
+				</div>
+
+				<div id="rightSetting" class="tg">
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<img class="monsterLogo "src="resources/monn.png" >
+						</div>
+						<div class="divTableCellG">
+							<div id="numOfMonstersInGame" style="alignment: top"></div>
+						</div>
+					</div>
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<div class="divTableCellG"><input id="5PointsColorG" type="color" value="#ff0000" required></div>
+						</div>
+						<div class="divTableCellG">
+							<div>5 Points</div>
+						</div>
+					</div>
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<div class="divTableCellG"><input id="15PointsColorG" type="color" value="#0000ff"  required></div>
+						</div>
+						<div class="divTableCellG">
+							<div>15 Points</div>
+						</div>
+					</div>
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<div class="divTableCellG"><input id="25PointsColorG" type="color" value="#00ff00"  required></div>
+						</div>
+						<div class="divTableCellG">
+							<div>25 Points</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 		</div>

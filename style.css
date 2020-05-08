@@ -27,7 +27,7 @@ body {
 }
 
 #mainContent {height: 100%; width:100%;}
-#leftSetting, #pacmanGame, #settingDisplay {
+#leftSetting, #pacmanGame, #rightSetting {
   display: inline-block;
   *display: inline;
   zoom: 1;
@@ -35,12 +35,24 @@ body {
   font-size: 12px;
 }
 #leftSetting {
+  float: left;
+  margin-top: 200px;
+
+  vertical-align: central;
+  width: 25%;
+}
+#pacmanGame {
+  width: 50%;
+  float: left;
+}
+
+#rightSetting {
+  float: right;
+  position: relative;
   margin-top: 200px;
   vertical-align: central;
   width: 25%;
 }
-#pacmanGame {width: 50%;}
-#settingDisplay {width: 25%;}
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -304,6 +316,13 @@ input[type=text]:focus, input[type=password]:focus {
   height: 15px;
   position: center;
 }
+
+.monsterLogo{
+  width: 150px;
+  height: 50px;
+  alignment: bottom;
+}
+
 #monstersValue{
   color: white;
   font-size: 22.5px;
@@ -422,6 +441,23 @@ li a {
 .divTableBody {
   display: table-row-group;
 }
+
+
+.divTableRowG {
+  font-size:  40px;
+  color:white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  display: table-row;
+  alignment: top;
+}
+.divTableCellG{
+  font-size:  40px;
+  color:white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  display: table-cell;
+  padding: 15px;
+}
+
 
 #resetBtn{
   background-color: black;
