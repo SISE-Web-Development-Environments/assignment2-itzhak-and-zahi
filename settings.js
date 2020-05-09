@@ -1,7 +1,4 @@
-var upKey;
-var downKey;
-var leftKey;
-var rightKey;
+
 var mute=false;
 var dialogIsOn = false;
 
@@ -38,19 +35,7 @@ function updateTextInputTime(val) {
     }
 }
 
-function updateKey(event, moving) {
-    switch (moving) {
-        case "up": upKey = event.which || event.keyCode;
-        break;
-        case "down": downKey = event.which || event.keyCode;
-        break;
-        case "left": leftKey = event.which || event.keyCode;
-        break;
-        case "right": rightKey = event.which || event.keyCode;
-        break;
-    }
 
-}
 
 function fillFormRandomly() {
     // $('upKey').reset();
@@ -95,12 +80,13 @@ function resetSettings() {
 
 }
 function muteMusic(){
-    if(mute){
-        $('#muteBtn').css("background-image","url(resources/unmute.png)");
-        mute=false;
-    }else{
-        $('#muteBtn').css("background-image","url(resources/mute.png)")
+    if(!mute){
+        $('#muteBtn').css("background-image","url(resources/mute.png)");
         mute=true;
+        clearInterval(intervalSound);
+    }else{
+        $('#muteBtn').css("background-image","url(resources/unmute.png)")
+        mute=false;
     }
 }
 

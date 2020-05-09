@@ -6,12 +6,19 @@
 		<script type="text/javascript" src="./menu.js"></script>
 		<script type="text/javascript" src="./register.js"></script>
 		<script type="text/javascript" src="./settings.js"></script>
+		<script type="text/javascript" src="./monstersModel.js"></script>
+		<script type="text/javascript" src="./cherryModel.js"></script>
+		<script type="text/javascript" src="./extraLifeModel.js"></script>
+		<script type="text/javascript" src="./pacmanModel.js"></script>
+		<script type="text/javascript" src="./rottenAppleModel.js"></script>
+		<script type="text/javascript" src="./keysModel.js"></script>
+		<script type="text/javascript" src="./kr"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<nav id="navbar" href="javascript:void(0)" style="display: none">
 			<ul>
 				<li id="user"><a id="currentUser">Hello, guest</a></li>
 				<li id="about"><a onclick="openDialog(),closeModal();">About</a></li>
-				<li id="logOut" style="float: right"><a>Log Out</a></li>
+				<li id="logOut" style="float: right"><a onclick="logOut()">Log Out</a></li>
 			</ul>
 		</nav>
 	</head>
@@ -24,27 +31,21 @@
 					<span onclick="cancelbtn(login)" class="close" title="Close Modal">&times;</span>
 					<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
 				</div>
-				<p>The developers of this pac-man game are:
+				<p>The student that developed this game are:
 					<br>
 					Zahi Kapri - ID: 307881276
 					<br>
 					Itzhak Finkelstein - ID: 203640271
 					<br>
-					asdsadsasadsa
+					Instructions:
 					<br>
-					We had difficulties designing the pacman shape. In addition, we had to decide the way of movement for the monsters, which wasn't that simple.
+					Your goal is to reach 100 Points in the limited time without getting getting eaten by the monsters.
 					<br>
-					Another problem we had to deal with is the snacks on the board, and how we can control who can eat them.
+					If your are in trouble search for the heart to get extra life.
 					<br>
-					We used several JQuery functions: ready- for initialize the canvas, the pacman, the monsters and the treat objects while DOM is ready.
+					You can also get extra 50 points by eating the cherry but beware of the rotten apple or else another monster will appear!
 					<br>
-					remove- to take the life elements out of the DOM.
-					<br>
-					append- to add life element into the DOM.
-					<br>
-					hide and show- to show errors for invalid values, or hide them if the user insert valid values.
-					<br>
-					and more...</p>
+					</p>
 			</div>
 
 		</div>
@@ -187,21 +188,6 @@
 											</div>
 										</div>
 									</div>
-									<!--					<span class="setting">-->
-									<!--						Choose 5 Points Color:-->
-									<!--						<input id="5PointsColor" type="color" required>-->
-									<!--						<br>-->
-									<!--					</span>-->
-									<!--					<span class="setting">-->
-									<!--						Choose 15 Points Color:-->
-									<!--						<input id="15PointsColor" type="color" required>-->
-									<!--						<br>-->
-									<!--					</span>-->
-									<!--					<span class="setting">-->
-									<!--						Choose 25 Points Color:-->
-									<!--						<input id="25PointsColor" type="color" required>-->
-									<!--						<br>-->
-									<!--					</span>-->
 									<br>
 
 									<!--Keys Settings-->
@@ -216,28 +202,21 @@
 													<div class="divTableCell"><img src="resources/right.png"></div>
 												</div>
 												<div class="divTableRow">
-													<div class="divTableCell"><input class="keyInput" id="leftKey" placeholder="Move Left" type="text" maxlength="1" onkeypress="updateKey(event,'left')"></div>
-													<div class="divTableCell"><input class="keyInput" id="upKey" placeholder="Move Up" type="text" maxlength="1" onkeypress="updateKey(event,'up')"></div>
-													<div class="divTableCell"><input class="keyInput" id="downKey" placeholder="Move Down" type="text" maxlength="1" onkeypress="updateKey(event,'down')"></div>
-													<div class="divTableCell"><input class="keyInput" id="rightKey" placeholder="Move Right" type="text" maxlength="1" onkeypress="updateKey(event,'right')"></div>
+													<div class="divTableCell"><input class="keyInput" id="leftKey" placeholder="Move Left" type="text" maxlength="1" onkeydown="updateKey(event,'left')"></div>
+													<div class="divTableCell"><input class="keyInput" id="upKey" placeholder="Move Up" type="text" maxlength="1" onkeydown="updateKey(event,'up')"></div>
+													<div class="divTableCell"><input class="keyInput" id="downKey" placeholder="Move Down" type="text" maxlength="1" onkeydown="updateKey(event,'down')"></div>
+													<div class="divTableCell"><input class="keyInput" id="rightKey" placeholder="Move Right" type="text" maxlength="1" onkeydown="updateKey(event,'right')"></div>
 												</div>
+												<div class="divTableRow">
+													<div class="divTableCell" ><img id="leftKeyImg" src="resources/keys/37.png"></div>
+													<div class="divTableCell" ><img id="upKeyImg" src="resources/keys/38.png"></div>
+													<div class="divTableCell" ><img id="downKeyImg" src="resources/keys/40.png"></div>
+													<div class="divTableCell" ><img id="rightKeyImg" src="resources/keys/39.png"></div>
+													</div>
 											</div>
 										</div>
 									</div>
 								</div>
-<!--								<div id="buttonsCell" class="divTableCell">-->
-<!--									<div class="buttonBox">-->
-<!--										<button id="randomBtn" type="button" style="background-image: url(resources/random.png)" title="Random Settings" class="btn" onclick="fillFormRandomly()"></button>-->
-<!--									</div>-->
-<!--									<br>-->
-<!--									<div class="buttonBox">-->
-<!--										<button id="resetBtn" type="reset" style="background-image: url(resources/reset.png)" title="Reset Settings" class="btn" onclick="resetSettings()"></button>-->
-<!--										<br>-->
-<!--										<br>-->
-<!--										<img src="resources/pacmanChar.png">-->
-
-<!--									</div>-->
-<!--								</div>-->
 							</div>
 							<div class="divTableRow" align="center" style="width: 25%">
 								<div class="divTableCell">
@@ -252,7 +231,7 @@
 								</div>
 								<div class="divTableCell">
 									<div class="buttonBox" style="width: 256px" style="height: 256px">
-										<button id="muteBtn" type="button" style="background-image: url(resources/mute.png)" onclick="muteMusic()" class="btnSetting" ></button>
+										<button id="muteBtn" type="button" style="background-image: url(resources/unmute.png)" onclick="muteMusic()" class="btnSetting" ></button>
 									</div>
 								</div>
 							</div>
@@ -291,7 +270,7 @@
 					<div class="tg" id="leftSetting" align="center">
 						<div class="divTableRowG">
 							<div class="divTableCellG">
-								<img src="resources/heart.png">
+								<img id="healthBar" src="resources/health5.png">
 							</div>
 							<div class="divTableCellG">
 								<label style="color: #f1f1f1" for="lblTime">LIFE:</label>
@@ -328,7 +307,7 @@
 				</div>
 
 				<div id="pacmanGame" class="tg">
-				<canvas id="canvas" height="725" width="725" style="margin-top:  40px"></canvas>
+					<canvas id="canvas" height="725" width="725" style="margin-top:  40px"></canvas>
 				</div>
 
 				<div id="rightSetting" class="tg">
@@ -362,6 +341,38 @@
 						</div>
 						<div class="divTableCellG">
 							<div>25 Points</div>
+						</div>
+					</div>
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<div class="divTableCellG">Move Up: </div>
+						</div>
+						<div class="divTableCellG">
+							<img id="inGameKeyUp" src="resources/keys/38.png">
+						</div>
+					</div>
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<div class="divTableCellG">Move Down: </div>
+						</div>
+						<div class="divTableCellG">
+							<img id="inGameKeyDown" src="resources/keys/40.png">
+						</div>
+					</div>
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<div class="divTableCellG">Move Right: </div>
+						</div>
+						<div class="divTableCellG">
+							<img id="inGameKeyRight" src="resources/keys/39.png">
+						</div>
+					</div>
+					<div class="divTableRowG">
+						<div class="divTableCellG">
+							<div class="divTableCellG">Move Left: </div>
+						</div>
+						<div class="divTableCellG">
+							<img id="inGameKeyLeft" src="resources/keys/37.png">
 						</div>
 					</div>
 				</div>

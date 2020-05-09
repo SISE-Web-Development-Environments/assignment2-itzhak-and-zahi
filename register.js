@@ -195,3 +195,17 @@ function check_password_login() {
         emptyPassLogin = true;
     }
 }
+
+function logOut() {
+    firstTime=true;
+    clearInterval(cherryInterval);
+    window.clearInterval(interval);
+    window.clearInterval(intervalMon);
+    window.clearInterval(healthInterval);
+    window.clearInterval(intervalSound);
+    window.clearInterval(rottenInterval);
+    window.clearInterval(currentTimeLeft);
+    changeDisplay(document.getElementById("welcome"));
+    document.getElementById("navbar").style.display="none";
+
+}
