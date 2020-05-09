@@ -50,65 +50,67 @@
 
 		</div>
 		<div id="wrapper" align="center">
-			<div align=center id="welcome" class="allDivs" style="display: block">
-				<p style="color: #f1f1f1"> welcome to pacman </p>
-				<br>
-				<img src="resources/pacpac.png" align="center">
-				<br>
-				<button  class="welcome" type="button" id="loginButton" onclick="changeDisplayToLoginOrRegister(login)">Login</button>
-				<button  class="welcome" type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
+			<div id="register" class="allDivs" style="display: none">
+				<span onclick="cancelbtn(register)" class="close" title="Close Modal">&times;</span>
+				<form id="registerForm" class="modal-content animate" >
+					<div class="container">
+						<div class="imgcontainer">
+							<span onclick="cancelbtn(register);changeDisplay(welcome)" class="close" title="Close Modal">&times;</span>
+							<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
+						</div>
+						<img src="resources/life.png">
+						<p>Please fill in this form to create an account.</p>
+						<hr>
+
+						<input class="formInput" id="uname" type="text" placeholder="Enter Username" name="uname" required>
+						<span id="unameError" class= "error-message"></span>
+
+
+						<input class="formInput" id="password" type="password" placeholder="Enter Password" name="psw" required>
+						<span id="passwordError" class= "error-message"></span>
+
+
+						<input  class="formInput" id="fullName" type="text" placeholder="Enter full name" name="fullname" required>
+						<span id="fullNameError" class= "error-message"></span>
+
+
+						<input class="formInput" id="email" type="text" placeholder="Enter Email" name="email" required>
+						<span id="emailError" class= "error-message"></span>
+						<div class="clearfix">
+							<button class="formBtn" type="submit" onclick="saveDetails()" class="signupbtn">Sign Up</button>
+							<button type="button" onclick="cancelbtn(register);changeDisplay(welcome)" class="cancelbtn">Cancel</button>
+						</div>
+					</div>
+				</form>
 			</div>
 
 			<div id="login" class="allDivs" class="modal" style="display: none">
-				<form id="loginForm" class="modal-content">
+				<form id="loginForm" class="modal-content animate" style="border-radius: 25px 25px 25px 25px">
 					<div class="imgcontainer">
-						<span onclick="cancelbtn(login)" class="close" title="Close Modal">&times;</span>
+						<span onclick="cancelbtn(login);changeDisplay(welcome)" class="close" title="Close Modal">&times;</span>
 						<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
 					</div>
-
+					<img src="resources/cherry.png">
 					<div class="container">
-						<input id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
-						<input id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
+						<input class="formInput" id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
+						<input class="formInput" id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
 						<span id="passLoginError" class= "error-message"></span>
-						<button type="submit" onclick="checkLoginDetails()">Login</button>
-
+						<button class="formBtn" type="submit" onclick="checkLoginDetails()">Login</button>
+						<button type="button" onclick="cancelbtn(login);changeDisplay(welcome)" class="cancelbtn" >Cancel</button>
 					</div>
-					<div class="container" style="background-color:#f1f1f1">
-						<button type="button" onclick="cancelbtn(login)" class="cancelbtn">Cancel</button>
-						<span class="psw">Forgot <a href="#">password?</a></span>
-				  	</div>
+
 				</form>
-			  </div>
+			</div>
+			<div align=center id="welcome" class="allDivs" style="display: block">
+				<img src="resources/pacmanLogo.png" align="center" style="margin-top: 20px">
+				<br>
+				<img src="resources/pacman.gif" align="center" height="400" style="margin: 100px">
+				<br>
+				<button  class="welcome" type="button" id="loginButton" onclick="changeDisplay(login)">Login</button>
+				<button  class="welcome" type="button" id="registerButton" onclick="changeDisplay(register)">Register</button>
+<!--				<p style="color: white" style="font-size: small; font-family: Lucida Sans,sans-serif">© Made By Zahi Kapri - 307881276 and Itzhak Finkelstein - 203640271</p>-->
+			</div>
 
-			  <div id="register" class="allDivs" style="display: none">
-				<span onclick="cancelbtn(register)" class="close" title="Close Modal">&times;</span>
-				<form id="registerForm" class="modal-content animate" >
-				  <div class="container">
-					<h1>Sign Up</h1>
-					<p>Please fill in this form to create an account.</p>
-					<hr>
-					
-					<input id="uname" type="text" placeholder="Enter Username" name="uname" required>
-					<span id="unameError" class= "error-message"></span>
-
-					
-					<input id="password" type="password" placeholder="Enter Password" name="psw" required>
-					<span id="passwordError" class= "error-message"></span>
-
-					
-					<input id="fullName" type="text" placeholder="Enter full name" name="fullname" required>
-					<span id="fullNameError" class= "error-message"></span>
-
-					
-					<input id="email" type="text" placeholder="Enter Email" name="email" required>
-					<span id="emailError" class= "error-message"></span>
-					<div class="clearfix">
-					  <button type="button" onclick="cancelbtn(register)" class="cancelbtn">Cancel</button>
-					  <button type="submit" onclick="saveDetails()" class="signupbtn">Sign Up</button>
-					</div>
-				  </div>
-				</form>
-			  </div>
 
 
 			<div id="settingPage" class="allDivs" style="display: none" align="center">
