@@ -76,6 +76,15 @@ function resetSettings() {
     $('#timeValue').text(60)
     $('#monstersValue').text(1)
     $('#ballsValue').text(50);
+    $('#upKeyImg').attr("src", "resources/keys/38.png");
+    $('#inGameKeyUp').attr("src", "resources/keys/38.png");
+    $('#downKeyImg').attr("src", "resources/keys/40.png");
+    $('#inGameKeyDown').attr("src", "resources/keys/40.png");
+    $('#leftKeyImg').attr("src", "resources/keys/37.png");
+    $('#inGameKeyLeft').attr("src", "resources/keys/37.png");
+    $('#rightKeyImg').attr("src", "resources/keys/39.png");
+    $('#inGameKeyRight').attr("src", "resources/keys/39.png");
+    resetKeys();
     document.getElementById("gameSettings").reset();
 
 }
