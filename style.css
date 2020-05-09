@@ -516,6 +516,12 @@ li a {
   padding: 15px;
 }
 
+#StartNewGame{
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-family: "Lucida Sans",sans-serif;
+}
 
 #resetBtn{
   background-color: black;

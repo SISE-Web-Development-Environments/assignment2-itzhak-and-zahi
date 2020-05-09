@@ -404,11 +404,16 @@ window.addEventListener("keydown",function (e) {
 },false);
 
 
-function stopp(){
-	alert(hihi);
-	clearInterval(intervalMon);
-	clearInterval(interval);
+function startNewGame(){
+	firstTime=true;
 	clearInterval(cherryInterval);
+	window.clearInterval(interval);
+	window.clearInterval(intervalMon);
+	window.clearInterval(healthInterval);
+	window.clearInterval(intervalSound);
+	window.clearInterval(rottenInterval);
+	window.clearInterval(currentTimeLeft);
+	startGame();
 }
 
 function playSong() {
