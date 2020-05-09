@@ -127,13 +127,21 @@ function saveDetails() {
 }
 
 function checkLoginDetails() {
+    var emptyPassLogin = false;
     var loginForm = document.getElementById("loginForm");
     var uname = loginForm.elements[0].value;
     var pass = loginForm.elements[1].value;
 
+    $("#passLogin").focusout(function () {
+        check_password_login();
+    });
+    if( pass.length < 1 ){
+        check_password_login();
+    }
+
     var details=localStorage.getItem(uname);
     if (details != null){
-        if( details[1].localeCompare(pass)){
+        if( details[1].localeCompare(pass)  && !emptyPassLogin){
             document.getElementById("currentUser").innerHTML = "Hello, " + uname;
             changeDisplay(document.getElementById("settingPage"),document.getElementById("welcome"));
             document.getElementById("loginForm").reset();
@@ -154,22 +162,6 @@ $("#loginForm").submit(function() {
 
     window.alert("login good")
     checkLoginDetails()
-    // if (checkLoginDetails()) {
-    //     document.getElementById("loginForm").reset();
-    //     document.getElementById("registerForm").reset();
-    //     document.getElementById('login-link').style.display = 'none';
-    //     document.getElementById('register-link').style.display = 'none';
-    //     document.getElementById('logout-link').style.display = 'inline-block';
-    //
-    //     changeDisplay("mainContent");
-    //     $("#login-error").hide();
-    //     $("nav").show();
-    //     return false;
-    // } else {
-    //     $("#login-error").html("Invalid username or password");
-    //     $("#login-error").show();
-    //     return false;
-    // }
 });
 
 
@@ -193,4 +185,13 @@ function changeDisplayToLoginOrRegister(inDiv) {
 function cancelbtn(divElement) {
     divElement.style.display = "none";
     $('#aboutModal').css("display", "none");
+}
+
+
+function check_password_login() {
+    if(pass.length < 1){
+        $("#passLoginError").html("password section is empty !");
+        $("#passLoginError").show();
+        emptyPassLogin = true;
+    }
 }

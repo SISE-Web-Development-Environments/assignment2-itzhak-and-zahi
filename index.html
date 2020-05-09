@@ -19,7 +19,7 @@
 	<body>
 		<div id="aboutModal" class="modal"  style="display: none">
 			<!-- Modal content -->
-			<div class="modal-content">
+			<div class="modal-content-about">
 				<div class="imgcontainer">
 					<span onclick="cancelbtn(login)" class="close" title="Close Modal">&times;</span>
 					<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
@@ -58,8 +58,8 @@
 				<button  class="welcome" type="button" id="registerButton" onclick="changeDisplayToLoginOrRegister(register)">Register</button>
 			</div>
 
-			<div id="login" class="allDivs" style="display: none">
-				<form id="loginForm" class="modal-content animate">
+			<div id="login" class="allDivs" class="modal" style="display: none">
+				<form id="loginForm" class="modal-content">
 					<div class="imgcontainer">
 						<span onclick="cancelbtn(login)" class="close" title="Close Modal">&times;</span>
 						<!--					<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
@@ -68,6 +68,7 @@
 					<div class="container">
 						<input id="uNameLogin" type="text" placeholder="Enter Username" name="uname" required>
 						<input id="passLogin" type="password" placeholder="Enter Password" name="psw" required>
+						<span id="passLoginError" class= "error-message"></span>
 						<button type="submit" onclick="checkLoginDetails()">Login</button>
 
 					</div>

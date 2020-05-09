@@ -65,15 +65,15 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
-button.welcome {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 30%;
-}
+/*button.welcome {*/
+/*  background-color: #4CAF50;*/
+/*  color: white;*/
+/*  padding: 14px 20px;*/
+/*  margin: 8px 0;*/
+/*  border: none;*/
+/*  cursor: pointer;*/
+/*  width: 30%;*/
+/*}*/
 
 button {
   background-color: #4CAF50;
@@ -94,6 +94,19 @@ button.btnSetting {
 }
 
 button.start {
+  background-color: coral;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 25px 25px 25px 25px;
+  height: 60px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  font-size: large;
+}
+
+.welcome {
   background-color: coral;
   color: white;
   padding: 14px 20px;
@@ -163,6 +176,13 @@ span.psw {
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
   width: 30%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content-about {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */

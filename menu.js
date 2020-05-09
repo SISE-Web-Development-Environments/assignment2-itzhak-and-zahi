@@ -12,8 +12,4 @@
 // }
 
 
-  function changeDisplayToLoginOrRegister(inDiv) {
-    inDiv.style.display = "block";
-  }
-
 
